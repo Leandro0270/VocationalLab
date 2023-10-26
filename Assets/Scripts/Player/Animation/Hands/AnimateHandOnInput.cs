@@ -1,28 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-    
 
-public class AnimateHandOnInput : MonoBehaviour
+namespace Player.Animation.Hands
 {
     
-    [SerializeField] private InputActionProperty pinchAnimation;
-    [SerializeField] private Animator handAnimator;
-    [SerializeField] private InputActionProperty gripAnimation;
-    
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(Animator))]
+    public class AnimateHandOnInput : MonoBehaviour
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        float triggerValue = pinchAnimation.action.ReadValue<float>();
-        handAnimator.SetFloat("Trigger", triggerValue);
-        float gripValue = gripAnimation.action.ReadValue<float>();
-        handAnimator.SetFloat("Grip", gripValue);
+        [SerializeField] private InputActionReference gripInputActionReference;
+        [SerializeField] private InputActionReference triggerInputActionReference;
+        [SerializeField] private Animator handAnimator;
+        private float _gripValue;
+        private float _triggerValue;
+
+        private void Awake()
+        {
+            if(!handAnimator)
+                handAnimator = GetComponent<Animator>();
+        }
+
+        void Update()
+        {
+            AnimateGrip();
+            AnimateTrigger();
+        }
+
+
+        private void AnimateGrip()
+        {
+            _gripValue = gripInputActionReference.action.ReadValue<float>();
+            handAnimator.SetFloat("Grip", _gripValue);
+        }
+    
+        private void AnimateTrigger()
+        {
+            _triggerValue = triggerInputActionReference.action.ReadValue<float>();
+            handAnimator.SetFloat("Trigger", _triggerValue);
+        }
     }
 }
