@@ -11742,6 +11742,8 @@ GameObject:
   - component: {fileID: 6481312989112056096}
   - component: {fileID: 6481312989112056094}
   - component: {fileID: 6481312989112056097}
+  - component: {fileID: 6481312989112056099}
+  - component: {fileID: 6481312989112056098}
   m_Layer: 0
   m_Name: telefone
   m_TagString: Untagged
@@ -11949,6 +11951,46 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.18380271, y: 0.042293817, z: 0.06407867}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6481312989112056098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481312989112056093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7018447388d75074fbb5cc1c9faaa022, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  phoneCollider: {fileID: 0}
+  voiceLines: {fileID: 0}
+  phoneBaseAudioSource: {fileID: 0}
+  phoneVoiceAudioSource: {fileID: 0}
+  phoneRing: {fileID: 0}
+  phonePickUp: {fileID: 0}
+  phoneHangUp: {fileID: 0}
+--- !u!135 &6481312989112056099
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6481312989112056093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.18
+  m_Center: {x: 0.07, y: 0, z: 0.0000020861626}
 --- !u!224 &6482017235142118793
 RectTransform:
   m_ObjectHideFlags: 0
