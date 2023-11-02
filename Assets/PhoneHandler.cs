@@ -13,9 +13,10 @@ public class PhoneHandler : MonoBehaviour
     [SerializeField] private AudioClip phoneRing;
     [SerializeField] private AudioClip phonePickUp;
     [SerializeField] private AudioClip phoneHangUp;
-    
+    [SerializeField] private float timeToComplain = 10;
     private int _sarahAngerLevel = 0;
     private bool _willIncreaseAnger = false;
+    private bool _isHangUp = false;
     private AudioClip _currentVoiceLine;
     
     
@@ -23,6 +24,8 @@ public class PhoneHandler : MonoBehaviour
     private bool _isPlayerOnPhone = false;
     
     
+    private bool _completedTask = false;
+    private bool _willPlayImpatientVoiceLine = false;
     private bool _isTutorial = true;
     private bool _isTutorialStep1 = false;
     private bool _isTutorialStep2 = false;
@@ -39,11 +42,20 @@ public class PhoneHandler : MonoBehaviour
     
     private IEnumerator PhoneRing()
     {
+        yield return new WaitForSeconds(phoneRing.length + 2);
         phoneBaseAudioSource.clip = phoneRing;
         phoneBaseAudioSource.Play();
-        yield return new WaitForSeconds(phoneRing.length + 2);
     }
 
+    private void ChooseAudioClip()
+    {
+        if(_isTutorial)
+            _currentVoiceLine = voiceLines.introductionVoiceLine;
+        else if (_isTutorialStep1)
+        {
+            _currentVoiceLine = voiceLines.firstStep;
+        }
+    }
 
     public void PickUpPhone()
     {
@@ -54,11 +66,22 @@ public class PhoneHandler : MonoBehaviour
     
     public void HangUpPhone()
     {
-        if (phoneBaseAudioSource.isPlaying && _willIncreaseAnger && _isPhonePickedUp)
+        if ((phoneBaseAudioSource.isPlaying || phoneVoiceAudioSource.isPlaying) && _willIncreaseAnger &&
+            _isPhonePickedUp)
+        {
+            _isHangUp = true;
             _sarahAngerLevel++;
-        
+        }
+
+        phoneBaseAudioSource.Pause();
+        phoneVoiceAudioSource.Pause();
+        phoneBaseAudioSource.clip = null;
+        phoneVoiceAudioSource.clip = null;
         phoneBaseAudioSource.clip = phoneHangUp;
+        phoneBaseAudioSource.Play();
+        _willIncreaseAnger = false;
         _isPhonePickedUp = false;
+        if(_isHangUp) StartCoroutine(PhoneRing());
         
     }
 
