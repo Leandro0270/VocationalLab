@@ -13,12 +13,11 @@ public class ScObPhoneVoiceLines : ScriptableObject
     public AudioClip thirdStep;
     public AudioClip fourthStep;
     public AudioClip ignoredVoiceLine;
-    
+    public AudioClip completedVoiceLine;
     public List<AudioClip> impatientVoiceLines;
     
     public List<AudioClip> wrongActionsVoiceLines;
     
-    public List<AudioClip> correctActionAfterWrongVoiceLines;
     
     public List<AudioClip> correctActionsVoiceLines;
     //In game voice line====================================================================================================
