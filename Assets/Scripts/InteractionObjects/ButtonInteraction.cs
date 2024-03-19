@@ -9,16 +9,14 @@ public class ButtonInteraction : MonoBehaviour
     [SerializeField] private UnityEvent onPress;
     [SerializeField] private UnityEvent onRelease;
     private GameObject _presser;
-    private bool _isPressed = false;
+    private bool _isPressed;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isPressed)
-        {
-            button.transform.localPosition = new Vector3(0,0.01f,0);
-            onPress.Invoke();
-            _isPressed = true;
-        }
+        if (_isPressed) return;
+        button.transform.localPosition = new Vector3(0,0.01f,0);
+        onPress.Invoke();
+        _isPressed = true;
 
     }
     

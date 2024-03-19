@@ -1,44 +1,118 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DeskHeightController : MonoBehaviour
 {
-    [SerializeField] private float alturaInicial;
-    [SerializeField] private float alturaMaxima;
-    [SerializeField] private float alturaMinima;
-    private bool _subindo;
-    private bool _descendo;
-    
+    private float _initialDeskHeight;
+    [SerializeField] private float maxDeskHeight;
+    [SerializeField] private float minDeskHeight;
+    private bool _up;
+    private bool _down;
+    private bool _reset;
 
+
+    private void Awake()
+    {
+        _initialDeskHeight = transform.position.y;
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if (_subindo)
+        if (_up)
         {
-            if(transform.position.y < alturaMaxima)
+            if(transform.position.y < maxDeskHeight)
                 transform.position += new Vector3(0, 0.001f, 0);
-        }else if (_descendo)
+        }else if (_down)
         {
-            if(transform.position.y > alturaMinima)
+            if(transform.position.y > minDeskHeight)
                 transform.position -= new Vector3(0, 0.001f, 0);
+        }
+
+        if (!_reset) return;
+        if(transform.position.y > _initialDeskHeight)
+            transform.position -= new Vector3(0, 0.01f, 0);
+        else if(transform.position.y < _initialDeskHeight)
+            transform.position += new Vector3(0, 0.01f, 0);
+        else
+        {
+            _reset = false;
         }
     }
 
 
-    public void SubirMesa(bool subindo)
+    public void RaiseDesk(bool up)
     {
-        _subindo = subindo;
+        if (up)
+        {
+            StopAllCoroutines();
+            _down = false;
+            _reset = false;
+            StartCoroutine(SetDeskHeightValue( 1f, true,false));
+        }
+        else
+        {
+            StopAllCoroutines();
+            _down = false;
+            _up = false;
+            _reset = false;
+        }
     }
 
-    public void DescerMesa(bool descer)
-    {
-        _descendo = descer;
+    public void LowerDesk(bool down)
+    { 
+        if(down){
+            StopAllCoroutines();
+            _up = false;
+            _reset = false;
+            StartCoroutine(SetDeskHeightValue(1f, false, false));
+        }
+        else
+        {
+            StopAllCoroutines();
+            _down = false;
+            _up = false;
+            _reset = false;
+        }
     }
     
-    public void ResetarMesa()
+    public void ResetDeskPosition(bool reset)
     {
-        transform.position = new Vector3(transform.position.x, alturaInicial, transform.position.z);
+        if (reset)
+        {
+            StopAllCoroutines();
+            _down = false;
+            _up = false;
+            StartCoroutine(SetDeskHeightValue(2.5f, false, true));
+        }
+        else
+        {
+            StopAllCoroutines();
+            _down = false;
+            _up = false;
+            _reset = false;
+        }
+    }
+
+    private IEnumerator SetDeskHeightValue(float delay, bool isUp, bool isReset)
+    {
+        yield return new WaitForSeconds(delay);
+        if (isReset)
+        {
+            _reset = true;
+        }
+        else{
+            if (isUp)
+            {
+                _up = true;
+            }
+            else
+            {
+                _down = true;
+            }
+        }
+        
     }
 }
