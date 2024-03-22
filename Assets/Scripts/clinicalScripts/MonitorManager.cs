@@ -57,6 +57,7 @@ public class MonitorManager : MonoBehaviour
     private GameObject _currentScreen;
     //=======================================================================
     private AudioSource _patientAudio;
+    private PatientBehavior _patientBehavior;
     private int _timesPlayerAsked = 0;
 
     private void Awake()
@@ -193,5 +194,23 @@ public class MonitorManager : MonoBehaviour
     {
         return _patientAudio;
     }
+    
+    public void SetPatientAudio(AudioSource patientAudio)
+    {
+        _patientAudio = patientAudio;
+    }
+    
+    // get e setters de patientBehavior
+    public PatientBehavior GetPatientBehavior()
+    {
+        return _patientBehavior;
+    }
+    
+    public void SetPatientBehavior(PatientBehavior patientBehavior)
+    {
+        _patientBehavior = patientBehavior;
+    }
+    
+    
     
 }

@@ -12,7 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - SCAN2_ON
+  - SCAN2_OFF
   m_InvalidKeywords: []
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -86,12 +86,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _Scan2:
         m_Texture: {fileID: 2800000, guid: fe460b7dfd2d5384a93d65a22344537d, type: 3}
-        m_Scale: {x: 10, y: 1}
-        m_Offset: {x: 3, y: 0}
+        m_Scale: {x: 0, y: 10}
+        m_Offset: {x: 3, y: 10}
     - _Scanlines:
         m_Texture: {fileID: 2800000, guid: 271b03d57c528f349a661f8ae6c0d919, type: 3}
-        m_Scale: {x: 10, y: 10}
-        m_Offset: {x: 1, y: 0}
+        m_Scale: {x: 0, y: 10}
+        m_Offset: {x: 0, y: 10}
     - _SecondaryFlicker:
         m_Texture: {fileID: 2800000, guid: ac782bf64bc0d4447bfd606db3ca6968, type: 3}
         m_Scale: {x: 0.1, y: 0.1}
@@ -119,7 +119,7 @@ Material:
     - _RimFalloff: 0.917
     - _RimStrenght: 2
     - _ScanStr: 0.766
-    - _ScanStr2: 1
+    - _ScanStr2: 0.637
     - _Shading: 0.25
     - _SrcBlend: 1
     - _UVSec: 0
