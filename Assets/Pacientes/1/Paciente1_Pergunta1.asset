@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf76043d464740df9f8bbe9b96f09975, type: 3}
+  m_Name: Paciente1_Pergunta1
+  m_EditorClassIdentifier: 
+  id: 0
+  categoryId: 0
+  isStarterQuestion: 0
+  isUnlocked: 0
+  title: 
+  question: 
+  isAnswered: 0
+  answer: 
+  answerAudio: {fileID: 0}
+  unlockQuestions: []
+  unlockedByQuestion: {fileID: 0}
+  unlockHint: 
+  questionOptionButton: {fileID: 0}

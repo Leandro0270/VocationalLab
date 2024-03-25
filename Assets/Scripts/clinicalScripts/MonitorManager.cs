@@ -51,7 +51,7 @@ public class MonitorManager : MonoBehaviour
     
     //Others=======================================================================
     [SerializeField] private HologramProjector hologramProjector;
-
+    [SerializeField] private HintBook hintBook;
     private bool _isMonitorOn;
     private GameObject _lastScreen;
     private GameObject _currentScreen;
@@ -173,9 +173,7 @@ public class MonitorManager : MonoBehaviour
                 spawnPositionIndex = 0;
             else
                 spawnPositionIndex++;
-            
         }
-        
     }
     
     
@@ -186,7 +184,7 @@ public class MonitorManager : MonoBehaviour
 
     public void AddNewHint(String hint)
     {
-        
+        hintBook.CheckHint(hint);
     }
     
     

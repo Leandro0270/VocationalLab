@@ -9,6 +9,7 @@ public class ScObDisease : ScriptableObject
     public int id;
     public String diseaseName;
     public String[] symptoms;
+    public String[] causes;
     public AudioClip treatmentExplication;
     
     
