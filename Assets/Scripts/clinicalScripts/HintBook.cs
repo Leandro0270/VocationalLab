@@ -13,11 +13,14 @@ public class HintBook : MonoBehaviour
     [SerializeField] private float pagePositionZ;
     [SerializeField] private float pagePositionX;
     [SerializeField] private float startPagePositionY;
+    [SerializeField] private float pageSpaceAngle;
     [SerializeField] private Transform bookCover;
     private List<HingeJoint> _pages = new List<HingeJoint>();
     private List<BookPage> _bookPages = new List<BookPage>();
     private List<BookPage.Link> _links;
-    
+    private List<String> _hints = new List<string>();
+    private bool _importNext;
+
 
     
 
@@ -27,12 +30,12 @@ public class HintBook : MonoBehaviour
         {
             HingeJoint page = Instantiate(pagePrefab, transform);
             _pages.Add(page);
-            page.transform.localPosition = new Vector3(pagePositionX, startPagePositionY +(pageSpacing*_pages.Count) ,pagePositionZ);
+            page.transform.localPosition = new Vector3(pagePositionX, startPagePositionY -(pageSpacing*_pages.Count) ,pagePositionZ);
             page.connectedBody = bookRigidbody;
-            page.anchor = new Vector3(page.anchor.x + (pageSpacing*_pages.Count), page.anchor.y + (pageSpacing*_pages.Count), page.anchor.z);
-            float currentMaxLimit = page.limits.max;
-            page.limits = new JointLimits {min = 0, max = currentMaxLimit - (pageSpacing*_pages.Count*100)};
-            _bookPages.Add(page.GetComponent<BookPage>());
+            page.limits = new JointLimits {min = 0, max = page.limits.max - pageSpaceAngle*(_pages.Count-1)};
+            PageSideLink sides = page.GetComponent<PageSideLink>();
+            _bookPages.Add(sides.bookPageSideA);
+            _bookPages.Add(sides.bookPageSideB);
         }
     }
     
@@ -47,20 +50,25 @@ public class HintBook : MonoBehaviour
 
             foreach (var checkHint in link.Causes)
                 checkHint.CheckCauses(hint);
+            
+            foreach (var checkHint in link.Causes)
+                checkHint.CheckSymptoms(hint);
+
         }
     }
     public void AddHint(String hint)
     {
-        bool importNext= false;
+        if(_hints.Contains(hint.Trim().ToLower())) return;
+        _hints.Add(hint.Trim().ToLower());
         foreach (var bookPage in _bookPages)
         {
-            if (importNext)
+            if (_importNext)
             {
                 foreach (var link in _links)
                 {
                     bookPage.LinkList.Add(link);
                 }
-                importNext = false;
+                _importNext = false;
             }
             if (bookPage.AddNewHint(hint))
             {
@@ -70,32 +78,55 @@ public class HintBook : MonoBehaviour
             if (bookPage.returnedLinks) continue;
             _links = bookPage.LinkList;
             bookPage.returnedLinks = true;
-            importNext = true;
+            _importNext = true;
         }
     }
-    
-    public void AddCause(List<String> causes, List<String> hints)
+
+    public void AddCause(String diseaseName, String[] causes, String[] hints)
     {
-        bool importNext= false;
-        foreach (var bookPage in _bookPages)
+        while (true)
         {
-            if (importNext)
+            foreach (var bookPage in _bookPages)
             {
-                foreach (var link in _links)
+                if (_importNext)
                 {
-                    bookPage.LinkList.Add(link);
+                    foreach (var link in _links)
+                    {
+                        bookPage.LinkList.Add(link);
+                    }
+
+                    _importNext = false;
                 }
-                importNext = false;
-            }
-            if (bookPage.AddNewCause(causes, hints))
-            {
-                return;
+
+                bool conseguiu = bookPage.AddNewCause(diseaseName, causes, hints);
+                if (conseguiu)
+                {
+                    return;
+                }
+
+
+                if (bookPage.returnedLinks) continue;
+                _links = bookPage.LinkList;
+                bookPage.returnedLinks = true;
+                _importNext = true;
             }
 
-            if (bookPage.returnedLinks) continue;
-            _links = bookPage.LinkList;
-            bookPage.returnedLinks = true;
-            importNext = true;
+            AddMorePages();
         }
     }
+
+
+    private void AddMorePages()
+    {
+        HingeJoint page = Instantiate(pagePrefab, transform);
+        _pages.Add(page);
+        page.transform.localPosition =
+            new Vector3(pagePositionX, startPagePositionY - (pageSpacing * _pages.Count), pagePositionZ);
+        page.connectedBody = bookRigidbody;
+        page.limits = new JointLimits { min = 0, max = page.limits.max - pageSpaceAngle * (_pages.Count - 1) };
+        PageSideLink sides = page.GetComponent<PageSideLink>();
+        _bookPages.Add(sides.bookPageSideA);
+        _bookPages.Add(sides.bookPageSideB);
+    }
+
 }

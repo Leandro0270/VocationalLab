@@ -92,9 +92,13 @@ public class PillCase : MonoBehaviour
         SetControlLevel(_currentMedication.controlLevel);
 
         medicationNameField.text = _currentMedication.medicationName;
-        medicationPurposeField.text = _currentMedication.treatmentPurpose.diseaseName;
-        medicationSideEffectsField.text = _currentMedication.sideEffects;
-        medicationDurationField.text = _currentMedication.treatmentDuration;
+        medicationPurposeField.text = $"Tratamento de {_currentMedication.treatmentPurposeDescription}";
+        medicationSideEffectsField.text = "";
+        foreach (var sideEffect in newMedication.sideEffects)
+        {
+            medicationSideEffectsField.text += $"-{sideEffect}\n";
+        }
+        medicationDurationField.text = $"Regime de tratamento {_currentMedication.treatmentDuration}";
     }
     
     private void SetControlLevel(int controlLevel)

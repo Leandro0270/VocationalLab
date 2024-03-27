@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MonitorQuestions : MonoBehaviour
 {
-    private ScObPatientQuestion[] _currentPatientQuestions;
+    private List<ScObPatientQuestion> _currentPatientQuestions;
     /* id - 1 Alimentação, atividade física, sono, vícios, higiene, saúde sexual, lazer,
      rotina */
     private List<ScObPatientQuestion> _lockedHabitsQuestions;
@@ -69,6 +69,8 @@ public class MonitorQuestions : MonoBehaviour
     private GameObject _lastScreen;
     private GameObject _currentScreen;
     private GameObject _nextScreen;
+
+    private bool _setup;
     
     
     private void Awake()
@@ -110,97 +112,127 @@ public class MonitorQuestions : MonoBehaviour
     private int _medicationQuestionId = 1;
     
 
+    public void OpenQuestionsPage()
+    {
+        _lastScreen = null;
+        _currentScreen = mainPageQuestionsScreen;
+        monitorManager.SelectNewScreen(_currentScreen);
+        _currentScreen.SetActive(true);
+    }
     public void SetCurrentPatientQuestions(ScObPatientQuestion[] questions)
     {
-        _currentPatientQuestions = questions;
+        if(_setup) return;
+        _lockedHabitsQuestions = new List<ScObPatientQuestion>();
+        _availableHabitsQuestions = new List<ScObPatientQuestion>();
+        _lockedClinicalHistoryQuestions = new List<ScObPatientQuestion>();
+        _availableClinicalHistoryQuestions = new List<ScObPatientQuestion>();
+        _lockedSymptomsQuestions = new List<ScObPatientQuestion>();
+        _availableSymptomsQuestions = new List<ScObPatientQuestion>();
+        _lockedMedicationQuestions = new List<ScObPatientQuestion>();
+        _availableMedicationQuestions = new List<ScObPatientQuestion>();
+        
+        _currentPatientQuestions = new List<ScObPatientQuestion>(questions);
         foreach (var question in _currentPatientQuestions)
         {
-            
+
 
             switch (question.categoryId)
-                    {
-                        case 1:
-                            openHabitsQuestionsPageButton.gameObject.SetActive(true);
-                            if (question.isUnlocked && question.unlockedByQuestion == null && !_availableHabitsQuestions.Contains(question)){
-                                _availableHabitsQuestions.Add(question);
-                                _availableButtonsHabits[0].SetQuestion(question,_habitsQuestionId, this);
-                                _availableButtonsHabits.RemoveAt(0);
-                                _habitsQuestionId++;
-                            }
-                            else
-                            {
-                                _lockedHabitsQuestions.Add(question);
-                            }
-                            break;
-                        case 2:
-                            openClinicalHistoryQuestionsPageButton.gameObject.SetActive(true);
-                            if (question.isUnlocked && question.unlockedByQuestion == null && !_availableClinicalHistoryQuestions.Contains(question)){
-                                _availableClinicalHistoryQuestions.Add(question);
-                                _availableButtonsClinicalHistory[0].SetQuestion(question,_clinicalQuestionId, this);
-                                _availableButtonsClinicalHistory.RemoveAt(0);
-                                _clinicalQuestionId++;
-                            }
-                            else
-                            {
-                                _lockedClinicalHistoryQuestions.Add(question);
-                            }
-                            break;
-                        case 3:
-                            openSymptomsQuestionsPageButton.gameObject.SetActive(true);
-                            if (question.isUnlocked && question.unlockedByQuestion == null && !_availableSymptomsQuestions.Contains(question)){
-                                _availableSymptomsQuestions.Add(question);
-                                _availableButtonsSymptoms[0].SetQuestion(question,_symptomsQuestionId, this);
-                                _availableButtonsSymptoms.RemoveAt(0);
-                                _symptomsQuestionId++;
-                            }
-                            else
-                            {
-                                _lockedSymptomsQuestions.Add(question);
-                            }
-                            break;
-                        case 4:
-                            openMedicationQuestionsPageButton.gameObject.SetActive(true);
-                            if (question.isUnlocked && question.unlockedByQuestion == null && !_availableMedicationQuestions.Contains(question)){
-                                _availableMedicationQuestions.Add(question);
-                                _availableButtonsMedication[0].SetQuestion(question,_medicationQuestionId, this);
-                                _availableButtonsMedication.RemoveAt(0);
-                                _medicationQuestionId++;
-                            }
-                            else
-                            {
-                                _lockedMedicationQuestions.Add(question);
-                            }
-                            break;
-                    }
-                
-            
-            foreach (var lockedSymptoms in _lockedSymptomsQuestions)
             {
+                case 1:
+                    openHabitsQuestionsPageButton.gameObject.SetActive(true);
+                    if (question.isUnlocked && question.unlockedByQuestion == null &&
+                        !_availableHabitsQuestions.Contains(question))
+                    {
+                        _availableHabitsQuestions.Add(question);
+                        _availableButtonsHabits[0].SetQuestion(question, _habitsQuestionId, this);
+                        _availableButtonsHabits.RemoveAt(0);
+                        _habitsQuestionId++;
+                    }
+                    else
+                    {
+                        _lockedHabitsQuestions.Add(question);
+                    }
+
+                    break;
+                case 2:
+                    openClinicalHistoryQuestionsPageButton.gameObject.SetActive(true);
+                    if (question.isUnlocked && question.unlockedByQuestion == null &&
+                        !_availableClinicalHistoryQuestions.Contains(question))
+                    {
+                        _availableClinicalHistoryQuestions.Add(question);
+                        _availableButtonsClinicalHistory[0].SetQuestion(question, _clinicalQuestionId, this);
+                        _availableButtonsClinicalHistory.RemoveAt(0);
+                        _clinicalQuestionId++;
+                    }
+                    else
+                    {
+                        _lockedClinicalHistoryQuestions.Add(question);
+                    }
+
+                    break;
+                case 3:
+                    openSymptomsQuestionsPageButton.gameObject.SetActive(true);
+                    if (question.isUnlocked && question.unlockedByQuestion == null &&
+                        !_availableSymptomsQuestions.Contains(question))
+                    {
+                        _availableSymptomsQuestions.Add(question);
+                        _availableButtonsSymptoms[0].SetQuestion(question, _symptomsQuestionId, this);
+                        _availableButtonsSymptoms.RemoveAt(0);
+                        _symptomsQuestionId++;
+                    }
+                    else
+                    {
+                        _lockedSymptomsQuestions.Add(question);
+                    }
+
+                    break;
+                case 4:
+                    openMedicationQuestionsPageButton.gameObject.SetActive(true);
+                    if (question.isUnlocked && question.unlockedByQuestion == null &&
+                        !_availableMedicationQuestions.Contains(question))
+                    {
+                        _availableMedicationQuestions.Add(question);
+                        _availableButtonsMedication[0].SetQuestion(question, _medicationQuestionId, this);
+                        _availableButtonsMedication.RemoveAt(0);
+                        _medicationQuestionId++;
+                    }
+                    else
+                    {
+                        _lockedMedicationQuestions.Add(question);
+                    }
+
+                    break;
+            }
+        }
+
+
+        foreach (var lockedSymptoms in _lockedSymptomsQuestions)
+        {
                 _availableButtonsSymptoms[0].SetQuestion(lockedSymptoms,_symptomsQuestionId, this);
                 _availableButtonsSymptoms.RemoveAt(0);
                 _symptomsQuestionId++;
-            }
-            foreach (var lockedMedication in _lockedMedicationQuestions)
-            {
+        }
+        foreach (var lockedMedication in _lockedMedicationQuestions)
+        {
                 _availableButtonsMedication[0].SetQuestion(lockedMedication,_medicationQuestionId, this);
                 _availableButtonsMedication.RemoveAt(0);
                 _medicationQuestionId++;
-            }
-            foreach (var lockedClinical in _lockedClinicalHistoryQuestions)
-            {
+        }
+        foreach (var lockedClinical in _lockedClinicalHistoryQuestions)
+        {
                 _availableButtonsClinicalHistory[0].SetQuestion(lockedClinical,_clinicalQuestionId, this);
                 _availableButtonsClinicalHistory.RemoveAt(0);
                 _clinicalQuestionId++;
-            }
-            foreach (var lockedHabits in _lockedHabitsQuestions)
-            {
+        }
+        foreach (var lockedHabits in _lockedHabitsQuestions) 
+        {
                 _availableButtonsHabits[0].SetQuestion(lockedHabits,_habitsQuestionId, this);
                 _availableButtonsHabits.RemoveAt(0);
                 _habitsQuestionId++;
-            }
-            
         }
             
+        
+        _setup = true;
     }
     
     public void OpenHabitsQuestionsPage()
@@ -307,6 +339,7 @@ public class MonitorQuestions : MonoBehaviour
                 break;
 
         }
+        
         _nextScreen = questionDetailsScreen;
         monitorManager.SelectNewScreen(_nextScreen);
         questionDetailsScreen.SetActive(true);
@@ -319,9 +352,7 @@ public class MonitorQuestions : MonoBehaviour
         _nextScreen.SetActive(false);
         _nextScreen = null;
         if (_selectedQuestion.isAnswered)
-        {
             _selectedQuestion.questionOptionButton.MarkAsDone();
-        }
         monitorManager.SelectNewScreen(_currentScreen);
         _selectedQuestion = null;
     }
@@ -330,8 +361,9 @@ public class MonitorQuestions : MonoBehaviour
     {
         _lastScreen.SetActive(true);
         _currentScreen.SetActive(false);
+        _nextScreen = _currentScreen;
         _currentScreen = _lastScreen;
-        monitorManager.SelectNewScreen(_currentScreen);
         _lastScreen = null;
+        monitorManager.SelectNewScreen(_currentScreen);
     }
 }

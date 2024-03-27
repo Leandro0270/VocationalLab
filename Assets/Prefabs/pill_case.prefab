@@ -535,11 +535,11 @@ MonoBehaviour:
   caseLabelMeshRenderer: {fileID: 5260480440201374112}
   caseCapMeshRenderer: {fileID: 3526720019469772017}
   lowControlLevelMaterials:
-  - {fileID: 2100000, guid: 9f95296fed099034ea0587716b225312, type: 2}
+  - {fileID: 2100000, guid: a6995aa16dad25442b7929c46a47efb3, type: 2}
   mediumControlLevelMaterials:
-  - {fileID: 2100000, guid: dc383e97db615ec49b1590df58260e0f, type: 2}
+  - {fileID: 2100000, guid: bf43a0721a5617d4a9576c046dee8443, type: 2}
   highControlLevelMaterials:
-  - {fileID: 2100000, guid: ef660ceed30424d418b66dff8726d494, type: 2}
+  - {fileID: 2100000, guid: c2fd363af63b2b34e81a2a611af134bf, type: 2}
   decalProjector: {fileID: 1604392292070700419}
   lowControlIconDecalMaterial: {fileID: 2100000, guid: dc11f776a3330fc4fbc1359b47577013,
     type: 2}
@@ -552,7 +552,7 @@ MonoBehaviour:
   medicationPurposeField: {fileID: 6350940338066106792}
   medicationSideEffectsField: {fileID: 4330646204979204782}
   medicationDurationField: {fileID: 4238368598502480162}
-  xrGrabInteractable: {fileID: 0}
+  xrGrabInteractable: {fileID: 577249728539835006}
 --- !u!114 &577249728539835006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5174801264599250840}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ad34abafad169848a38072baa96cdb2, type: 3}
   m_Name: 

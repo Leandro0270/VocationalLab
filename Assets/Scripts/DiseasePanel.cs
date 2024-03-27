@@ -10,10 +10,11 @@ public class DiseasePanel : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textPrefab;
     [SerializeField] private GameObject symptomsPanel;
     [SerializeField] private GameObject causesPanel;
+    [SerializeField] private GameObject uniqueCausePanel;
     private List<TextMeshProUGUI> _symptomsTexts = new List<TextMeshProUGUI>();
     private List<TextMeshProUGUI> _causesTexts = new List<TextMeshProUGUI>();
-
-    public void SetDisease(String diseaseTitle, List<String> symptoms, List<String> causes)
+    private int _probability=0;
+    public void SetDisease(String diseaseTitle, String[] symptoms, String[] causes)
     {
         diseaseName.text = diseaseTitle;
         foreach (var symptom in symptoms)
@@ -22,12 +23,23 @@ public class DiseasePanel : MonoBehaviour
             newSymptom.text = symptom;
             _symptomsTexts.Add(newSymptom);
         }
+        
+        if(causes.Length == 1)
+        {
+            uniqueCausePanel.SetActive(true);
+            causesPanel.SetActive(false);
+            TextMeshProUGUI newCause = uniqueCausePanel.GetComponent<TextMeshProUGUI>();
+            newCause.text = causes[0];
+            _causesTexts.Add(newCause);
+            return;
+        }
         foreach (var cause in causes)
         {
             TextMeshProUGUI newCause = Instantiate(textPrefab, causesPanel.transform);
             newCause.text = cause;
             _causesTexts.Add(newCause);
         }
+        
     }
     
     
@@ -35,9 +47,10 @@ public class DiseasePanel : MonoBehaviour
     {
             foreach (var text in _symptomsTexts)
             {
-                if (text.text != symptoms) continue;
+                if (text.text.Trim().ToLower() != symptoms.Trim().ToLower()) continue;
                 String newText = $"<s> {text.text} <s>";
                 text.text = newText;
+                _probability++;
             }
         
     }
@@ -47,9 +60,10 @@ public class DiseasePanel : MonoBehaviour
 
             foreach (var text in _causesTexts)
             {
-                if (text.text != cause) continue;
+                if (text.text.Trim().ToLower() != cause.Trim().ToLower()) continue;
                 String newText = $"<s> {text.text} <s>";
                 text.text = newText;
+                _probability++;
             }
         
     }

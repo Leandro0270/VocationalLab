@@ -15,7 +15,6 @@ public class MonitorManager : MonoBehaviour
     [SerializeField] private GameObject diagnosisScreen;
     [SerializeField] private GameObject examScreen;
     [SerializeField] private GameObject askScreen;
-    [SerializeField] private GameObject observationScreen;
     //Main Patient Page======================================================================
     [SerializeField] private Button mainPage_examButton;
     [SerializeField] private Button mainPage_askButton;
@@ -28,9 +27,11 @@ public class MonitorManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI mainPage_jobField;
     [SerializeField] private TextMeshProUGUI mainPage_useMedicationField;
     [SerializeField] private Image mainPage_imageField;
+    [SerializeField] private TextMeshProUGUI mainPage_ageField;
     //=======================================================================
     private GameObject _currentPatientGameObject;
     private String _currentPatientName;
+    private String _currentPatientAge;
     private String _currentPatientGender;
     private String _currentPatientJob;
     private Sprite _currentPatientPhoto;
@@ -56,16 +57,92 @@ public class MonitorManager : MonoBehaviour
     private GameObject _lastScreen;
     private GameObject _currentScreen;
     //=======================================================================
-    private AudioSource _patientAudio;
-    private PatientBehavior _patientBehavior;
+    [SerializeField] private PatientBehavior patientBehavior;
     private int _timesPlayerAsked = 0;
-
+    [SerializeField] private MonitorDiagnosis monitorDiagnosis;
+    [SerializeField] private ScObDisease[] diseases;
+    [SerializeField] private MonitorQuestions monitorQuestions;
+    
+    [SerializeField] private AudioSource patientAudioSource;
+    [SerializeField] private AudioSource doctorAudioSource;
+    [SerializeField] private AudioClip welcomeDoctorAudio;
+    private AudioClip _currentPatientWelcomeAudioClip;
+    private bool _doctorAudioPlaying;
+    private bool _patientAudioPlaying;
+    [SerializeField] private ScObPatient debugPatient;
     private void Awake()
     {
         _isMonitorOn = true;
         _currentScreen = mainPatientScreen;
         _instantiatedMedications = new List<PillCase>();
     }
+
+    private void Start()
+    {
+    
+        foreach (var disease in diseases)
+        {  
+            foreach (var symptom in disease.symptoms)
+            {
+                hintBook.AddHint(symptom);
+
+            }
+        }
+        
+        foreach (var disease in diseases)
+        {   
+            hintBook.AddCause(disease.diseaseName, disease.causes, disease.symptoms);
+            foreach (var symptom in disease.symptoms)
+            {
+                hintBook.AddHint(symptom);
+
+            }
+        }
+        
+        StartAppointment(debugPatient, patientAudioSource);
+    }
+    
+    
+    private void StartAppointment(ScObPatient newPatient, AudioSource patientAudio)
+    {
+        SetNewPatient(newPatient, patientAudio);
+        mainPage_diagnosisButton.interactable = false;
+        mainPage_askButton.interactable = false;
+        mainPage_medicationButton.interactable = false;
+    }
+
+    public IEnumerator StartTalk()
+    {
+        {
+            if (_doctorAudioPlaying || _patientAudioPlaying)
+            {
+                if(_doctorAudioPlaying)
+                    yield return new WaitWhile(() => doctorAudioSource.isPlaying);
+            }
+
+            doctorAudioSource.clip = welcomeDoctorAudio;
+            StartCoroutine(DoctorThenPatientDialogue());
+        }
+    }
+    
+    
+    private IEnumerator DoctorThenPatientDialogue()
+    {
+        _doctorAudioPlaying = true;
+        doctorAudioSource.Play();
+        yield return new WaitWhile(() => doctorAudioSource.isPlaying);
+        _doctorAudioPlaying = false;
+        yield return new WaitForSeconds(2);
+        StartCoroutine(patientBehavior.StartDialogue(_currentPatientWelcomeAudioClip));
+        yield return new WaitWhile(() => patientAudioSource.isPlaying);
+        mainPage_diagnosisButton.interactable = true;
+        mainPage_askButton.interactable = true;
+        mainPage_medicationButton.interactable = true;
+
+    }
+    
+    
+    
 
     private void Update()
     {
@@ -79,13 +156,16 @@ public class MonitorManager : MonoBehaviour
     {
         if (_isMonitorOn)
         {
-            _currentScreen = mainPatientScreen.activeSelf ? mainPatientScreen : medicationScreen.activeSelf ? medicationScreen : diagnosisScreen.activeSelf ? diagnosisScreen : examScreen.activeSelf ? examScreen : askScreen.activeSelf ? askScreen : observationScreen;
+            _currentScreen = mainPatientScreen.activeSelf ? mainPatientScreen :
+                medicationScreen.activeSelf ? medicationScreen :
+                diagnosisScreen.activeSelf ? diagnosisScreen :
+                examScreen.activeSelf ? examScreen :
+                askScreen.activeSelf ? askScreen : mainPatientScreen;
             mainPatientScreen.SetActive(false);
             medicationScreen.SetActive(false);
             diagnosisScreen.SetActive(false);
             examScreen.SetActive(false);
             askScreen.SetActive(false);
-            observationScreen.SetActive(false);
             _isMonitorOn = false;
         }
         else
@@ -122,36 +202,54 @@ public class MonitorManager : MonoBehaviour
         examScreen.SetActive(false);
         askScreen.SetActive(false);
         medicationScreen.SetActive(false);
-        observationScreen.SetActive(false);
         mainPatientScreen.SetActive(true);
-        _patientAudio = patientAudio;
+        patientAudioSource= patientAudio;
+        _currentPatientWelcomeAudioClip = newPatient.firstContactAudioClip;
         _currentPatientName = newPatient.fullName;
         _currentPatientGender = $"Sexo: {newPatient.gender}";
         _currentPatientJob = $"Profissão: {newPatient.job}";
         _currentPatientPhoto = newPatient.photo;
+        _currentPatientAge = $"Idade {newPatient.age}";
         _currentPatientDisease = newPatient.disease;
         _currentPatientReportedSymptoms = "Sintomas relatados: \n" +
                                           $" {newPatient.reportedSymptoms}";
         _currentPatientQuestions = newPatient.questions;
-
         _currentPatientUsedMedication = newPatient.usedMedication;
         mainPage_useMedicationField.text = _currentPatientUsedMedication.Length > 0 ? "Usa remédio: Sim" : "Usa remédio: Não";
         mainPage_reportedSymptomsField.text = _currentPatientReportedSymptoms;
         mainPage_nameField.text = _currentPatientName;
+        mainPage_ageField.text = _currentPatientAge;
         mainPage_genderField.text = _currentPatientGender;
         mainPage_jobField.text = _currentPatientJob;
         mainPage_imageField.sprite = _currentPatientPhoto;
         mainPage_medicationButton.enabled = _currentPatientUsedMedication.Length > 0;
         
+        
     }
 
+    public void OpenDiagnosticScreen()
+    {
+        diagnosisScreen.SetActive(true);
+        mainPatientScreen.SetActive(false);
+        monitorDiagnosis.OpenDiagnosticPanel();
+        monitorDiagnosis.OrganizeDiseasesByProbability();
+    }
+    
+    public void OpenQuestionScreen()
+    {
+        askScreen.SetActive(true);
+        mainPatientScreen.SetActive(false);
+        monitorQuestions.SetCurrentPatientQuestions(_currentPatientQuestions);
+        monitorQuestions.OpenQuestionsPage();
+        
+    }
     
     
     //Medication methods
     public void SpawnMedication()
     {
         
-        if (_currentPatientUsedMedication.Length <= 0) return;
+        if (_currentPatientUsedMedication.Length < 1) return;
         if(_instantiatedMedications.Count > 0)
             foreach (var medication in _instantiatedMedications)
             {
@@ -176,7 +274,10 @@ public class MonitorManager : MonoBehaviour
         }
     }
     
-    
+    public void ConfirmDiagnosis(ScObDisease disease)
+    {
+        Debug.Log(disease == _currentPatientDisease ? "Acertou" : "Errou");
+    }
     public void AddTimesPlayerAsked()
     {
         _timesPlayerAsked++;
@@ -185,28 +286,41 @@ public class MonitorManager : MonoBehaviour
     public void AddNewHint(String hint)
     {
         hintBook.CheckHint(hint);
+        monitorDiagnosis.OrganizeDiseasesByProbability();
     }
     
     
     public AudioSource GetPatientAudio()
     {
-        return _patientAudio;
+        return patientAudioSource;
     }
     
-    public void SetPatientAudio(AudioSource patientAudio)
+    public void SetPatientAudioSource(AudioSource patientAudio)
     {
-        _patientAudio = patientAudio;
+        patientAudioSource = patientAudio;
     }
     
     // get e setters de patientBehavior
     public PatientBehavior GetPatientBehavior()
     {
-        return _patientBehavior;
+        return patientBehavior;
     }
+    
+    public ScObDisease GetPatientDisease()
+    {
+        return _currentPatientDisease;
+    }
+    
+    public List<ScObDisease> GetDiseases()
+    {
+        return new List<ScObDisease>(diseases);
+    }
+    
+    
     
     public void SetPatientBehavior(PatientBehavior patientBehavior)
     {
-        _patientBehavior = patientBehavior;
+        this.patientBehavior = patientBehavior;
     }
     
     

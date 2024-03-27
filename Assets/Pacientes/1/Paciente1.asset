@@ -13,12 +13,25 @@ MonoBehaviour:
   m_Name: Paciente1
   m_EditorClassIdentifier: 
   id: 1
+  firstContactAudioClip: {fileID: 8300000, guid: f536a69a685e32c4696c2e4828e01f92,
+    type: 3}
   fullName: Helena Sycko Ramalho Silva
   gender: Feminino
+  age: 22
   job: Escritora
-  disease: {fileID: 0}
-  reportedSymptoms: 
-  photo: {fileID: 0}
-  usedMedication: []
-  questions: []
-  diagnosisComplexity: 0
+  disease: {fileID: 11400000, guid: f75fe980255480e458e2ac24fd27b2cf, type: 2}
+  reportedSymptoms: Dor abdominal e desconforto persistente
+  photo: {fileID: 21300000, guid: a422fb73d2410424e967499acea1d504, type: 3}
+  usedMedication:
+  - {fileID: 11400000, guid: b4f25acfb39ee0a47b18a2adc8c72569, type: 2}
+  questions:
+  - {fileID: 11400000, guid: 719ca2c17be923e4a94c67b72699b043, type: 2}
+  - {fileID: 11400000, guid: dc9c03dd28f06d44c83a1768a836a9a5, type: 2}
+  - {fileID: 11400000, guid: 0705de3a48794b545b351e24716e445c, type: 2}
+  - {fileID: 11400000, guid: 4ae43e760ae936d4cbb06ab8b58a1886, type: 2}
+  - {fileID: 11400000, guid: 5df3445e7b60bac4e875752f794f01f7, type: 2}
+  - {fileID: 11400000, guid: 55fb42c6a827cb44eac4ad356adb1782, type: 2}
+  - {fileID: 11400000, guid: 60abd84461ed53f4eb51f01f1a23cfd2, type: 2}
+  - {fileID: 11400000, guid: e4dac54968f599545bddf3d68a5f1f18, type: 2}
+  - {fileID: 11400000, guid: 7ea2cf7698ddd774ea25232f7432f0b6, type: 2}
+  diagnosisComplexity: 1

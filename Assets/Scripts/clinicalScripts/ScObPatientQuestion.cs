@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,12 @@ using UnityEngine.UI;
         public bool isUnlocked;
         public string title;
         public string question;
+        public AudioClip questionAudio;
         public bool isAnswered;
         public string answer;
         public AudioClip answerAudio;
         public ScObPatientQuestion[] unlockQuestions;
         public ScObPatientQuestion unlockedByQuestion;
-        public string unlockHint = "";
+        public String[] unlockHint;
         public QuestionOption questionOptionButton;
     }

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d911fcf5104def84d8b1e3944b55a009, type: 3}
+  m_Name: COVID-19
+  m_EditorClassIdentifier: 
+  id: 9
+  diseaseName: COVID-19
+  symptoms:
+  - Febre
+  - Tosse
+  - Dificuldade para respirar
+  - Perda de olfato e paladar
+  - Perda dopaladar
+  causes:
+  - "Infec\xE7\xE3o pelo coronav\xEDrus SARS-CoV-2"
+  treatmentExplication: {fileID: 0}
+  requireStethoscope: 0
+  requireSphygmomanometer: 0
+  requireThermometer: 0
+  requireOphthalmoscope: 0
+  requireOtoscope: 0
+  requireReflexHammer: 0
+  requirePenlight: 0
+  requireUltrasound: 0
+  requireXray: 0
+  requireUrineTests: 0
+  requireBloodTest: 0
+  requireElectrocardiogram: 0
+  electrocardiogramResult: "Resultados dentro dos padr\xF5es"
+  urineTestResult: "Resultados dentro dos padr\xF5es"
+  xrayResult: "Resultados dentro dos padr\xF5es"
+  ultrasoundResult: "Resultados dentro dos padr\xF5es"
+  bloodTestResult: "Resultados dentro dos padr\xF5es"

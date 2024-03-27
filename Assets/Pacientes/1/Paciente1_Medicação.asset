@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2c9f2ad52c488449f591413055af65, type: 3}
   m_Name: "Paciente1_Medica\xE7\xE3o"
   m_EditorClassIdentifier: 
-  medicationName: 
-  treatmentPurpose: {fileID: 0}
-  sideEffects: 
-  treatmentDuration: 
-  controlLevel: 0
+  medicationName: Esomeprazol
+  treatmentPurposeDescription: "\xDAlceras P\xE9pticas"
+  diseaseTreatment: {fileID: 11400000, guid: 98822cd802cd605488b77216226bf8f9, type: 2}
+  sideEffects:
+  - "Dor de cabe\xE7a"
+  - Diarreia
+  - "N\xE1useas"
+  - "V\xF4mitos"
+  - "Flatul\xEAncia"
+  - Dor abdominal
+  - "Constipa\xE7\xE3o"
+  treatmentDuration: Paliativo
+  controlLevel: 1

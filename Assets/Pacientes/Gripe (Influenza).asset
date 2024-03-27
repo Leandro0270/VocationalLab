@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d911fcf5104def84d8b1e3944b55a009, type: 3}
-  m_Name: "Paciente1_Doen\xE7a"
+  m_Name: Gripe (Influenza)
   m_EditorClassIdentifier: 
-  id: 0
-  diseaseName: 
-  symptoms: []
+  id: 1
+  diseaseName: Gripe (Influenza)
+  symptoms:
+  - Febre
+  - Tosse
+  - Dor de garganta
+  - Dores musculares
+  - Fadiga
+  - "Congest\xE3o nasal"
+  causes:
+  - "Contamina\xE7\xE3o pelo v\xEDrus da Influenza"
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0

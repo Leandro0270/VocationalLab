@@ -7,8 +7,9 @@ using UnityEngine;
 public class ScObMedication : ScriptableObject
 {
     public String medicationName;
-    public ScObDisease treatmentPurpose;
-    public String sideEffects;
+    public string treatmentPurposeDescription;
+    public ScObDisease diseaseTreatment;
+    public String[] sideEffects;
     public String treatmentDuration;
     [Range(0,3)]
     public int controlLevel;

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf76043d464740df9f8bbe9b96f09975, type: 3}
+  m_Name: Estresse
+  m_EditorClassIdentifier: 
+  id: 0
+  categoryId: 1
+  isStarterQuestion: 0
+  isUnlocked: 0
+  title: "N\xEDvel de estresse"
+  question: "Entendi que voc\xEA \xE9 muito ocupada com o seu trabalho, como est\xE1
+    seu n\xEDvel de estresse?"
+  questionAudio: {fileID: 8300000, guid: c1fac189c38809c4ea34cbbb0a15b532, type: 3}
+  isAnswered: 0
+  answer: "Quanto ao estresse, ele \xE9 praticamente uma constante na minha vida,
+    dada a natureza dos prazos e da criatividade exigida no meu trabalho."
+  answerAudio: {fileID: 8300000, guid: cbcc8ed466c1e0d4d82393ccda5c09c3, type: 3}
+  unlockQuestions: []
+  unlockedByQuestion: {fileID: 11400000, guid: e4dac54968f599545bddf3d68a5f1f18, type: 2}
+  unlockHint:
+  - Estresse
+  questionOptionButton: {fileID: 0}

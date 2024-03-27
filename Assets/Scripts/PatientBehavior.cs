@@ -29,9 +29,13 @@ public class PatientBehavior : MonoBehaviour
     
     [SerializeField] private float distanceToSit = 1.3f;
     [SerializeField] private float rotationAngleY = 190f;
-
+    
+    private bool _startedDialogue;
+    [SerializeField] private MonitorManager monitorManager;
     
     [SerializeField] private float turnSpeed = 2f;
+
+    private bool _patientAudioPlaying;
 
 
     public bool debug;
@@ -48,16 +52,10 @@ public class PatientBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (debug)
+        if(!_startedDialogue && !walkingToChair)
         {
-            StartTalking();
-            debug = false;
-        }
-
-        if (debug2)
-        {
-            StopTalking();
-            debug2 = false;
+            _startedDialogue = true;
+            StartCoroutine(monitorManager.StartTalk());
         }
 
         if (walkingToChair){
@@ -82,6 +80,20 @@ public class PatientBehavior : MonoBehaviour
 
     }
     
+    public IEnumerator StartDialogue(AudioClip audioClip)
+    {
+        if(_patientAudioPlaying) yield break;
+        _patientAudioPlaying = true;
+        audioSource.clip = audioClip;
+        StartTalking();
+        audioSource.Play();
+        yield return new WaitWhile(() => audioSource.isPlaying);
+        StopTalking();
+        _patientAudioPlaying = false;
+
+    }
+    
+    
     private IEnumerator TalkAnimation()
     {
         if (_isTalking || _isListening) yield break;
@@ -97,7 +109,7 @@ public class PatientBehavior : MonoBehaviour
         animator.SetInteger("TalkingAnimation", _currentTalkAnimation);
         
         
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         _isTalking = false;
         StartCoroutine(TalkAnimation());
     }

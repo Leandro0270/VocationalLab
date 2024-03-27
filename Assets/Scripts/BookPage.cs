@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -25,7 +26,7 @@ public class BookPage : MonoBehaviour
     private void Awake()
     {
         _pageSize = pageSpace.rect.height;
-        _usedSize = _pageSize;
+        _usedSize = 0;
 
     }
     
@@ -37,7 +38,9 @@ public class BookPage : MonoBehaviour
 
     public bool AddNewHint(String hint)
     {
-        _usedSize += hintPrefab.GetComponent<RectTransform>().rect.height;
+        Debug.Log(hint+" / Espaço usado: " + _usedSize + " Tamanho da página: " + _pageSize);
+        Debug.Log(hint + " / Tamanho: " + (hintPrefab.GetComponent<RectTransform>().rect.height)/3);
+        _usedSize += ((hintPrefab.GetComponent<RectTransform>().rect.height+ 0.9f)/3);
         if (_usedSize >= _pageSize) return false;
         SymptomsTextPanel newHint = Instantiate(hintPrefab, hintPanel.transform);
         newHint.SetSymptom(hint);
@@ -52,6 +55,7 @@ public class BookPage : MonoBehaviour
 
         Link newLink = new Link();
         newLink.HintName = hint;
+        newLink.Hints.Add(newHint);
         LinkList.Add(newLink);
         return true;
 
@@ -59,40 +63,31 @@ public class BookPage : MonoBehaviour
 
 
 
-    public bool AddNewCause(List<String> causes, List<String> hints)
+    public bool AddNewCause(String diseaseName, String[] causes, String[] hints)
     {
-        _usedSize += causePrefab.GetComponent<RectTransform>().rect.height;
-        if (_usedSize >= _pageSize) return false;
         DiseasePanel newCause = Instantiate(causePrefab, causesPanel.transform);
-        newCause.SetDisease("Disease", hints, causes);
+        _usedSize += (newCause.GetComponent<RectTransform>().rect.height + 1);
+        if (_usedSize >= _pageSize)
+        {
+            Destroy(newCause.gameObject);
+            return false;
+        }
+        
+        newCause.SetDisease(diseaseName, hints, causes);
         bool foundHint = false;
         bool foundCause = false;
         if (LinkList.Count > 0)
         {
-            var index = 0;
-            foreach (var link in LinkList)
+            foreach (var link in from link in LinkList from hintName in hints where link.HintName == hintName select link)
             {
-                if (link.HintName == hints[index])
-                {
-                    link.Causes.Add(newCause);
-                    foundHint = true;
-                }
-
-                ;
-                index++;
+                link.Causes.Add(newCause);
+                foundHint = true;
             }
 
-            index = 0;
-            foreach (var link in LinkList)
+            foreach (var link in from link in LinkList from causeName in causes where link.HintName == causeName select link)
             {
-                if (link.HintName == causes[index])
-                {
-                    link.Causes.Add(newCause);
-                    foundCause = true;
-                }
-
-                ;
-                index++;
+                link.Causes.Add(newCause);
+                foundCause = true;
             }
         }
 
@@ -124,10 +119,9 @@ public class BookPage : MonoBehaviour
 
     public class Link
     {
-        public String HintName;
-        public List<DiseasePanel> Causes;
-        public List<SymptomsTextPanel> Hints;
-
+        public String HintName = "";
+        public List<DiseasePanel> Causes = new();
+        public List<SymptomsTextPanel> Hints = new();
     }
 }
 

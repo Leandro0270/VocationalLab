@@ -37,6 +37,8 @@ public class ScObDisease : ScriptableObject
     public String xrayResult = "Resultados dentro dos padrões";
     public String ultrasoundResult = "Resultados dentro dos padrões";
     public String bloodTestResult = "Resultados dentro dos padrões";
+    
+    public int currentProbability = 0;
 
 
 

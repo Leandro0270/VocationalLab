@@ -10,8 +10,11 @@ public class ScObPatient : ScriptableObject
 {
     [Header("General Info----------------")]
     public int id;
+
+    public AudioClip firstContactAudioClip;
     public string fullName;
     public string gender;
+    public int age;
     public string job;
     public ScObDisease disease;
     public string reportedSymptoms;

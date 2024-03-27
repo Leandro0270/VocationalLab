@@ -18,7 +18,7 @@ public class SymptomsTextPanel : MonoBehaviour
     
     public void CheckSymptom(String symptom)
     {
-        if (symptomText.text != symptom) return;
+        if (symptomText.text.Trim().ToLower() != symptom.Trim().ToLower()) return;
         symptomText.text = $"<s> {symptomText.text} <s>";
         if(check != null)
             check.SetActive(true);

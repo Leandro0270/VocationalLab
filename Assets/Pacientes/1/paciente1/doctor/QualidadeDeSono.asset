@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf76043d464740df9f8bbe9b96f09975, type: 3}
+  m_Name: QualidadeDeSono
+  m_EditorClassIdentifier: 
+  id: 0
+  categoryId: 1
+  isStarterQuestion: 1
+  isUnlocked: 1
+  title: Qualidade do sono
+  question: "Como voc\xEA descreveria a qualidade do seu sono? Tem dificuldades para
+    dormir?"
+  questionAudio: {fileID: 8300000, guid: b9825fdd12fa7bb4d8f8b8f7e75fa05d, type: 3}
+  isAnswered: 0
+  answer: "Tem sido dif\xEDcil, viu? Minha mente n\xE3o para, e isso me faz rolar
+    na cama um temp\xE3o antes de conseguir dormir. Ent\xE3o, a qualidade est\xE1
+    l\xE1 em baixo"
+  answerAudio: {fileID: 8300000, guid: 371e5bd783216444084780d17a89d475, type: 3}
+  unlockQuestions: []
+  unlockedByQuestion: {fileID: 0}
+  unlockHint: []
+  questionOptionButton: {fileID: 0}
