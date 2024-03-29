@@ -14,20 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 11
   diseaseName: "\xDAlceras P\xE9pticas"
-  symptoms:
-  - "V\xF4mitos"
-  - "N\xE1useas"
-  - "Incha\xE7o"
-  - "Indigest\xE3o"
-  - Perda de peso
-  - sangramento gastrointestinal
   causes:
-  - "Infec\xE7\xE3o por Helicobacter pylori"
-  - "Abuso de anti-inflamat\xF3rios"
-  - Tabagismo
-  - "Abuso de \xE1lcool"
-  - Estresse
-  - "H\xE1bitos alimentares"
+  - {fileID: 11400000, guid: cd69fbfdf6359c146a71c6228910281b, type: 2}
+  - {fileID: 11400000, guid: 51eed51477edba94a8e242f43ffd3770, type: 2}
+  - {fileID: 11400000, guid: ff9633a00cfd91b488310f4a49f06746, type: 2}
+  - {fileID: 11400000, guid: 583cf1d1c16a4c0409c1c0916104a75a, type: 2}
+  - {fileID: 11400000, guid: c0a0b7221d158ee4298fb8a72405847c, type: 2}
+  - {fileID: 11400000, guid: 63f04c5c6ce4a2645a5b03f3c320d8c8, type: 2}
+  - {fileID: 11400000, guid: 47bb31ce9825ec64c852da4b50611a46, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 3812701e0d31c3840afe3147cd2f20c1, type: 2}
+  - {fileID: 11400000, guid: 695a75fb26e46034d976aee7b0fa4180, type: 2}
+  - {fileID: 11400000, guid: 985e7fd3ea1e8ce458c24a852c2b6eb6, type: 2}
+  - {fileID: 11400000, guid: ef1fe4897dba8844a9b4e33a2eb3a6a8, type: 2}
+  - {fileID: 11400000, guid: 3f20f355c48b76e43956dc85adcc1301, type: 2}
+  - {fileID: 11400000, guid: 0b57d8127fe9d3345902d5d4ee8264bc, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0

@@ -39,6 +39,7 @@ public class MonitorManager : MonoBehaviour
     private ScObMedication[] _currentPatientUsedMedication;
     private ScObPatientQuestion[] _currentPatientQuestions;
     private ScObDisease _currentPatientDisease;
+    private ScObPatient _currentPatient;
     //XR=======================================================================
     [SerializeField] private XRInteractionManager xrInteractionManager;
     //Prefabs=======================================================================
@@ -84,7 +85,7 @@ public class MonitorManager : MonoBehaviour
         {  
             foreach (var symptom in disease.symptoms)
             {
-                hintBook.AddHint(symptom);
+                hintBook.AddHint(symptom.symptomName);
 
             }
         }
@@ -94,7 +95,7 @@ public class MonitorManager : MonoBehaviour
             hintBook.AddCause(disease.diseaseName, disease.causes, disease.symptoms);
             foreach (var symptom in disease.symptoms)
             {
-                hintBook.AddHint(symptom);
+                hintBook.AddHint(symptom.symptomName);
 
             }
         }
@@ -109,6 +110,10 @@ public class MonitorManager : MonoBehaviour
         mainPage_diagnosisButton.interactable = false;
         mainPage_askButton.interactable = false;
         mainPage_medicationButton.interactable = false;
+        foreach (var symptom in _currentPatient.firstSymptoms)
+        {
+            AddNewHint(symptom.symptomName);
+        }
     }
 
     public IEnumerator StartTalk()
@@ -197,6 +202,7 @@ public class MonitorManager : MonoBehaviour
 
     public void SetNewPatient(ScObPatient newPatient, AudioSource patientAudio)
     {
+        
         medicationScreen.SetActive(false);
         diagnosisScreen.SetActive(false);
         examScreen.SetActive(false);
@@ -205,6 +211,7 @@ public class MonitorManager : MonoBehaviour
         mainPatientScreen.SetActive(true);
         patientAudioSource= patientAudio;
         _currentPatientWelcomeAudioClip = newPatient.firstContactAudioClip;
+        _currentPatient = newPatient;
         _currentPatientName = newPatient.fullName;
         _currentPatientGender = $"Sexo: {newPatient.gender}";
         _currentPatientJob = $"Profissão: {newPatient.job}";

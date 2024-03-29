@@ -14,16 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7
   diseaseName: Malaria
-  symptoms:
-  - Febre
-  - Calafrios
-  - Excesso de suor
-  - "Dores de cabe\xE7a"
-  - "N\xE1useas"
-  - "V\xF4mitos"
-  - Fadiga
   causes:
-  - "Contamina\xE7\xE3o por parasitas Plasmodium"
+  - {fileID: 11400000, guid: 523de16fd794f5943b478bd0275f97b2, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 8941dc09355a2ac4183532d5ec17754b, type: 2}
+  - {fileID: 11400000, guid: da80bf2fd9f71654797c60ea6fb0e728, type: 2}
+  - {fileID: 11400000, guid: f444e7d5c0c962e4f9a311d2e1263375, type: 2}
+  - {fileID: 11400000, guid: 7cc1066385aa72049b6bb301701e1f32, type: 2}
+  - {fileID: 11400000, guid: 5c69d1c6d666dd944bba28f5f2b9071b, type: 2}
+  - {fileID: 11400000, guid: 2b2420bf52b7d3941846b96bc19af20a, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: 985e7fd3ea1e8ce458c24a852c2b6eb6, type: 2}
+  - {fileID: 11400000, guid: 695a75fb26e46034d976aee7b0fa4180, type: 2}
+  - {fileID: 11400000, guid: 3812701e0d31c3840afe3147cd2f20c1, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -42,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

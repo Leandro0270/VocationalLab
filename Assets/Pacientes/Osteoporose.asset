@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   diseaseName: Osteoporose
-  symptoms:
-  - Dor nos ossos
-  - Dor nas costas
-  - Perda de altura
   causes:
-  - "Defici\xEAncia hormonal"
-  - "Dieta pobre de c\xE1lcio"
-  - "Inatividade f\xEDsica"
-  - Tabagismo
+  - {fileID: 11400000, guid: 51eed51477edba94a8e242f43ffd3770, type: 2}
+  - {fileID: 11400000, guid: 63f04c5c6ce4a2645a5b03f3c320d8c8, type: 2}
+  - {fileID: 11400000, guid: ff9633a00cfd91b488310f4a49f06746, type: 2}
+  - {fileID: 11400000, guid: c0a0b7221d158ee4298fb8a72405847c, type: 2}
+  - {fileID: 11400000, guid: 47bb31ce9825ec64c852da4b50611a46, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: f91f3b8b693c66d48b5f442c0c6c8948, type: 2}
+  - {fileID: 11400000, guid: 183045e561ff9974881af8d9318b428b, type: 2}
+  - {fileID: 11400000, guid: ce9559eaa5f53264cbf65d595b6f57ad, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -41,3 +42,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

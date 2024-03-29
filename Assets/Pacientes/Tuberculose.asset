@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   diseaseName: Tuberculose
-  symptoms:
-  - Tosse
-  - Dor no peito
-  - Tosse com sangue
-  - Febre
-  - Perda de peso
-  - Excesso de suor
   causes:
-  - "Contamina\xE7\xE3o pelo bacilo Mycobacterium tuberculosis"
+  - {fileID: 11400000, guid: 97f9b4e3cdeac8e40b1be97349fa734f, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 119761ba28d52cf40a45036f20f9e7f0, type: 2}
+  - {fileID: 11400000, guid: f444e7d5c0c962e4f9a311d2e1263375, type: 2}
+  - {fileID: 11400000, guid: 19dae1ed497ab6a4fb960614940a3d58, type: 2}
+  - {fileID: 11400000, guid: 8941dc09355a2ac4183532d5ec17754b, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: 36da95ea5106ae9469db546603ddba87, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -41,3 +41,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

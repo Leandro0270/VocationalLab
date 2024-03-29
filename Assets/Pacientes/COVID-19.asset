@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9
   diseaseName: COVID-19
-  symptoms:
-  - Febre
-  - Tosse
-  - Dificuldade para respirar
-  - Perda de olfato e paladar
-  - Perda dopaladar
   causes:
-  - "Infec\xE7\xE3o pelo coronav\xEDrus SARS-CoV-2"
+  - {fileID: 11400000, guid: 63e2a233f5d88a540aea9de0a3ed40d3, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 36da95ea5106ae9469db546603ddba87, type: 2}
+  - {fileID: 11400000, guid: c310b80aedd539a4290edbf1b8138f97, type: 2}
+  - {fileID: 11400000, guid: 8941dc09355a2ac4183532d5ec17754b, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: 7cc1066385aa72049b6bb301701e1f32, type: 2}
+  - {fileID: 11400000, guid: 5c69d1c6d666dd944bba28f5f2b9071b, type: 2}
+  - {fileID: 11400000, guid: 200f8c3c7c6ee6549a468307b0619283, type: 2}
+  - {fileID: 11400000, guid: cfe4fac0eec758f498b42324a8abe7b7, type: 2}
+  - {fileID: 11400000, guid: 2ed1a314a4e13ad46b8aeebcc6c146d8, type: 2}
+  - {fileID: 11400000, guid: 800050c0661819d4792348aae57e0814, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -40,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

@@ -31,8 +31,8 @@ public class MonitorDiagnosis : MonoBehaviour
     //infos
     private ScObDisease _currentDiseaseSelected;
     private String _currentDiseaseName;
-    private List<String> _currentDiseaseSymptoms;
-    private List<String> _currentDiseaseCauses;
+    private List<ScObSymptoms> _currentDiseaseSymptoms;
+    private List<ScObCause> _currentDiseaseCauses;
 
     private void Start()
     {
@@ -77,18 +77,18 @@ public class MonitorDiagnosis : MonoBehaviour
             _ => _currentDiseaseSelected
         };
         _currentDiseaseName = _currentDiseaseSelected.diseaseName;
-        _currentDiseaseSymptoms = new List<string>(_currentDiseaseSelected.symptoms);
-        _currentDiseaseCauses = new List<string>(_currentDiseaseSelected.causes);
+        _currentDiseaseSymptoms = new List<ScObSymptoms>(_currentDiseaseSelected.symptoms);
+        _currentDiseaseCauses = new List<ScObCause>(_currentDiseaseSelected.causes);
         diseaseInfoName.text = _currentDiseaseName;
         diseaseInfoSymptoms.text = "Sintomas: ";
         foreach (var symptom in _currentDiseaseSymptoms)
         {
-            diseaseInfoSymptoms.text += symptom + ", ";
+            diseaseInfoSymptoms.text += symptom.symptomName + ", ";
         }
         diseaseInfoCauses.text = "Causas: ";
         foreach (var cause in _currentDiseaseCauses)
         {
-            diseaseInfoCauses.text += cause + ", ";
+            diseaseInfoCauses.text += cause.causeName + ", ";
         }
         diseaseOptionsPanel.SetActive(false);
         diseaseInfoPanel.SetActive(true);

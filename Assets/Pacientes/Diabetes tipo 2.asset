@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   diseaseName: Diabetes tipo 2
-  symptoms:
-  - Sede excessiva
-  - Fome frequente
-  - Perda de peso
-  - Fadiga
-  - "Vs\xE3o emba\xE7ada"
-  - "Cicatriza\xE7\xE3o lenta."
   causes:
-  - "Resist\xEAncia \xE0 insulina"
-  - "Defici\xEAncia na produ\xE7\xE3o de insulina"
-  - Obesidade
-  - "Inatividade f\xEDsica"
-  - "Hist\xF3rico familiar de diabetes"
+  - {fileID: 11400000, guid: 7a1c331962edf574da5a089db5da99ee, type: 2}
+  - {fileID: 11400000, guid: d901553fef624ad4585ac1175f83ac95, type: 2}
+  - {fileID: 11400000, guid: 47bb31ce9825ec64c852da4b50611a46, type: 2}
+  - {fileID: 11400000, guid: 30f6bce7b2317f0408f30c011c781ce4, type: 2}
+  - {fileID: 11400000, guid: 047f8fdcee9131143a95d36ca0ce47d4, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: c5e41448a4557d348a3d15aabe3a9da4, type: 2}
+  - {fileID: 11400000, guid: b06c4a2182ec57f43a8b33dd82543134, type: 2}
+  - {fileID: 11400000, guid: ef1fe4897dba8844a9b4e33a2eb3a6a8, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: 467d6859e06b6ad48827c20a98a77c2f, type: 2}
+  - {fileID: 11400000, guid: a5315423eecc70f47995f481f980805b, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -45,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

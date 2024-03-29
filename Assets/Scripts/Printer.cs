@@ -27,7 +27,7 @@ public class Printer : MonoBehaviour
     {
         if (debug)
         {
-            PrintText(debugText);
+            PrintText(debugText,debugText);
             debug = false;
         }
     }
@@ -37,15 +37,15 @@ public class Printer : MonoBehaviour
         _spawnedPapers = new List<TextMeshPro>();
     }
     
-    public void PrintText(String text)
+    public void PrintText(String question, String answer )
     {
         if(_isPrinting) return;
-        _textToPrint = text;
+        _textToPrint = $"<color=red>Você: {question}</color=red>\n \n<color=blue>Paciente: {answer}</color=blue>";
         if(paperSpawnlimit <= _spawnedPapers.Count)
         {
             foreach (var paperText in _spawnedPapers)
             {
-                if (text != paperText.text) continue;
+                if (_textToPrint != paperText.text) continue;
                 GameObject paper = paperText.gameObject.transform.parent.gameObject;
                 _spawnedPapers.Remove(paperText);
                 Destroy(paper);

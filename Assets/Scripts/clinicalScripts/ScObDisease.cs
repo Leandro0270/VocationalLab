@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 [CreateAssetMenu(fileName = "ScObDisease", menuName = "ScriptableObjects/ScObDisease", order = 2)]
 
 public class ScObDisease : ScriptableObject
 {
     public int id;
     public String diseaseName;
-    public String[] symptoms;
-    public String[] causes;
+    public ScObCause[] causes;
+    public ScObSymptoms[] symptoms;
     public AudioClip treatmentExplication;
     
     

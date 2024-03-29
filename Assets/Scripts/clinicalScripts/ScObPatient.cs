@@ -21,6 +21,7 @@ public class ScObPatient : ScriptableObject
     public Sprite photo;
     public ScObMedication[] usedMedication;
     public ScObPatientQuestion[] questions;
+    public ScObSymptoms[] firstSymptoms;
     [Range(0,5)]
     public int diagnosisComplexity;
 

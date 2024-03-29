@@ -20,6 +20,7 @@ using UnityEngine.UI;
         public AudioClip answerAudio;
         public ScObPatientQuestion[] unlockQuestions;
         public ScObPatientQuestion unlockedByQuestion;
-        public String[] unlockHint;
+        public ScObCause[] unlockCause;
+        public ScObSymptoms[] unlockSymptoms;
         public QuestionOption questionOptionButton;
     }

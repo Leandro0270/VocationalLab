@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   diseaseName: Dengue
-  symptoms:
-  - 'Febre '
-  - "Dor de cabe\xE7a"
-  - "Dor atr\xE1s dos olhos"
-  - Dores musculares
-  - Dores articulares
-  - "Erup\xE7\xE3o cut\xE2nea"
-  - "N\xE1useas"
-  - "V\xF4mitos"
   causes:
-  - "Contamina\xE7\xE3o pelo v\xEDrus da Dengue"
+  - {fileID: 11400000, guid: c4c381ffa39c1ce45a5c8106c7292b39, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 2b2420bf52b7d3941846b96bc19af20a, type: 2}
+  - {fileID: 11400000, guid: 5c69d1c6d666dd944bba28f5f2b9071b, type: 2}
+  - {fileID: 11400000, guid: 8941dc09355a2ac4183532d5ec17754b, type: 2}
+  - {fileID: 11400000, guid: 50a153c016f24534990dfaffee4fe6d9, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: cc85fb11344001640b0a8f37ea73436b, type: 2}
+  - {fileID: 11400000, guid: 695a75fb26e46034d976aee7b0fa4180, type: 2}
+  - {fileID: 11400000, guid: 3812701e0d31c3840afe3147cd2f20c1, type: 2}
+  - {fileID: 11400000, guid: 985e7fd3ea1e8ce458c24a852c2b6eb6, type: 2}
+  - {fileID: 11400000, guid: 7cc1066385aa72049b6bb301701e1f32, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -43,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

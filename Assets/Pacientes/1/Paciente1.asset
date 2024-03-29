@@ -34,4 +34,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 60abd84461ed53f4eb51f01f1a23cfd2, type: 2}
   - {fileID: 11400000, guid: e4dac54968f599545bddf3d68a5f1f18, type: 2}
   - {fileID: 11400000, guid: 7ea2cf7698ddd774ea25232f7432f0b6, type: 2}
+  firstSymptoms:
+  - {fileID: 11400000, guid: 3f20f355c48b76e43956dc85adcc1301, type: 2}
+  - {fileID: 11400000, guid: ce731b37e3f017444b284bd163591aa0, type: 2}
   diagnosisComplexity: 1

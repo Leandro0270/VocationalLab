@@ -38,8 +38,7 @@ public class BookPage : MonoBehaviour
 
     public bool AddNewHint(String hint)
     {
-        Debug.Log(hint+" / Espaço usado: " + _usedSize + " Tamanho da página: " + _pageSize);
-        Debug.Log(hint + " / Tamanho: " + (hintPrefab.GetComponent<RectTransform>().rect.height)/3);
+
         _usedSize += ((hintPrefab.GetComponent<RectTransform>().rect.height+ 0.9f)/3);
         if (_usedSize >= _pageSize) return false;
         SymptomsTextPanel newHint = Instantiate(hintPrefab, hintPanel.transform);
@@ -63,7 +62,7 @@ public class BookPage : MonoBehaviour
 
 
 
-    public bool AddNewCause(String diseaseName, String[] causes, String[] hints)
+    public bool AddNewCause(String diseaseName,ScObCause[] causes, ScObSymptoms[] hints)
     {
         DiseasePanel newCause = Instantiate(causePrefab, causesPanel.transform);
         _usedSize += (newCause.GetComponent<RectTransform>().rect.height + 1);
@@ -78,13 +77,13 @@ public class BookPage : MonoBehaviour
         bool foundCause = false;
         if (LinkList.Count > 0)
         {
-            foreach (var link in from link in LinkList from hintName in hints where link.HintName == hintName select link)
+            foreach (var link in from link in LinkList from hint in hints where link.HintName == hint.symptomName select link)
             {
                 link.Causes.Add(newCause);
                 foundHint = true;
             }
 
-            foreach (var link in from link in LinkList from causeName in causes where link.HintName == causeName select link)
+            foreach (var link in from link in LinkList from cause in causes where link.HintName == cause.causeName select link)
             {
                 link.Causes.Add(newCause);
                 foundCause = true;
@@ -96,7 +95,7 @@ public class BookPage : MonoBehaviour
             foreach (var hint in hints)
             {
                 Link newLink = new Link();
-                newLink.HintName = hint;
+                newLink.HintName = hint.symptomName;
                 newLink.Causes.Add(newCause);
             }
         }
@@ -106,7 +105,7 @@ public class BookPage : MonoBehaviour
         foreach (var cause in causes)
         {
             Link newLink = new Link();
-            newLink.HintName = cause;
+            newLink.HintName = cause.causeName;
             newLink.Causes.Add(newCause);
         }
         

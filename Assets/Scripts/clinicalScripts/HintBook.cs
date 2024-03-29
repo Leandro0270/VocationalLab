@@ -6,7 +6,8 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class HintBook : MonoBehaviour
-{   [SerializeField] Rigidbody bookRigidbody;
+{
+    [SerializeField] Rigidbody bookRigidbody;
     [SerializeField] private HingeJoint pagePrefab;
     [SerializeField] private int numberOfPages;
     [SerializeField] private float pageSpacing;
@@ -14,26 +15,34 @@ public class HintBook : MonoBehaviour
     [SerializeField] private float pagePositionX;
     [SerializeField] private float startPagePositionY;
     [SerializeField] private float pageSpaceAngle;
-    [SerializeField] private Transform bookCover;
+    [SerializeField] private BoxCollider coverCollider;
     private List<HingeJoint> _pages = new List<HingeJoint>();
+    private List<PageSideLink> _pageSides = new List<PageSideLink>();
     private List<BookPage> _bookPages = new List<BookPage>();
     private List<BookPage.Link> _links;
     private List<String> _hints = new List<string>();
+    private bool _rightGrabbedPage;
+    private bool _leftGrabbedPage;
     private bool _importNext;
+    
 
 
     
 
     private void Awake()
     {
+        coverCollider.layerOverridePriority = numberOfPages;
         for (int i = 0; i < numberOfPages; i++)
         {
+            
             HingeJoint page = Instantiate(pagePrefab, transform);
             _pages.Add(page);
             page.transform.localPosition = new Vector3(pagePositionX, startPagePositionY -(pageSpacing*_pages.Count) ,pagePositionZ);
             page.connectedBody = bookRigidbody;
             page.limits = new JointLimits {min = 0, max = page.limits.max - pageSpaceAngle*(_pages.Count-1)};
             PageSideLink sides = page.GetComponent<PageSideLink>();
+            _pageSides.Add(sides);
+            sides.grabCollider.layerOverridePriority = (numberOfPages-_pages.Count);
             _bookPages.Add(sides.bookPageSideA);
             _bookPages.Add(sides.bookPageSideB);
         }
@@ -82,7 +91,7 @@ public class HintBook : MonoBehaviour
         }
     }
 
-    public void AddCause(String diseaseName, String[] causes, String[] hints)
+    public void AddCause(String diseaseName, ScObCause[] causes, ScObSymptoms[] hints)
     {
         while (true)
         {
@@ -115,9 +124,18 @@ public class HintBook : MonoBehaviour
         }
     }
 
+   
+    
+
 
     private void AddMorePages()
     {
+        numberOfPages++;
+        coverCollider.layerOverridePriority++;
+        foreach (var pageSide  in _pageSides)
+        {
+            pageSide.grabCollider.layerOverridePriority++;
+        }
         HingeJoint page = Instantiate(pagePrefab, transform);
         _pages.Add(page);
         page.transform.localPosition =
@@ -125,6 +143,7 @@ public class HintBook : MonoBehaviour
         page.connectedBody = bookRigidbody;
         page.limits = new JointLimits { min = 0, max = page.limits.max - pageSpaceAngle * (_pages.Count - 1) };
         PageSideLink sides = page.GetComponent<PageSideLink>();
+        sides.grabCollider.layerOverridePriority = (numberOfPages-_pages.Count);
         _bookPages.Add(sides.bookPageSideA);
         _bookPages.Add(sides.bookPageSideB);
     }

@@ -14,16 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   diseaseName: "Hipertens\xE3o (Press\xE3o alta)"
-  symptoms:
-  - "Dores de cabe\xE7a"
-  - Tontura
-  - "Vis\xE3o emba\xE7ada"
-  - "Palpita\xE7\xF5es card\xEDacas"
   causes:
-  - "Hist\xF3rico familiar de hipertens\xE3o"
-  - "Inatividade f\xEDsica"
-  - Obesidade
-  - Dieta rica em sal
+  - {fileID: 11400000, guid: c0a0b7221d158ee4298fb8a72405847c, type: 2}
+  - {fileID: 11400000, guid: 47bb31ce9825ec64c852da4b50611a46, type: 2}
+  - {fileID: 11400000, guid: 30f6bce7b2317f0408f30c011c781ce4, type: 2}
+  - {fileID: 11400000, guid: ff9633a00cfd91b488310f4a49f06746, type: 2}
+  - {fileID: 11400000, guid: 63f04c5c6ce4a2645a5b03f3c320d8c8, type: 2}
+  - {fileID: 11400000, guid: 583cf1d1c16a4c0409c1c0916104a75a, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: 7cc1066385aa72049b6bb301701e1f32, type: 2}
+  - {fileID: 11400000, guid: 19dae1ed497ab6a4fb960614940a3d58, type: 2}
+  - {fileID: 11400000, guid: 467d6859e06b6ad48827c20a98a77c2f, type: 2}
+  - {fileID: 11400000, guid: f5260608745d31741b24c2dcf12e9b0d, type: 2}
+  - {fileID: 11400000, guid: 17736352acb05e748a1a3f2b2677d65d, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -42,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

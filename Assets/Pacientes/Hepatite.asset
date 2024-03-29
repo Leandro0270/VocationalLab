@@ -14,17 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6
   diseaseName: Hepatite
-  symptoms:
-  - Pele amarelada
-  - Dor abdominal
-  - Urina escura
-  - Fadiga
-  - "N\xE1useas"
   causes:
-  - "Abuso de \xE1lcool"
-  - "Abuso de subst\xE2ncias t\xF3xicas"
-  - Abuso de medicamentos
-  - "Contamina\xE7\xE3o pelo v\xEDrus da hepatite A,B ou C"
+  - {fileID: 11400000, guid: bfe26dff7cf7bab4c9ddee7e5186fa86, type: 2}
+  - {fileID: 11400000, guid: 63f04c5c6ce4a2645a5b03f3c320d8c8, type: 2}
+  - {fileID: 11400000, guid: 542d64730ec5b1c40ac495f14af93711, type: 2}
+  - {fileID: 11400000, guid: 51eed51477edba94a8e242f43ffd3770, type: 2}
+  symptoms:
+  - {fileID: 11400000, guid: a06e19743d020ef428e2cb3cb55e2f09, type: 2}
+  - {fileID: 11400000, guid: 2bd865d5d10a0704882279d113599bf6, type: 2}
+  - {fileID: 11400000, guid: 335e3ac9ccea24944bbbe4c10f7ab35b, type: 2}
+  - {fileID: 11400000, guid: 3f20f355c48b76e43956dc85adcc1301, type: 2}
+  - {fileID: 11400000, guid: 985e7fd3ea1e8ce458c24a852c2b6eb6, type: 2}
+  - {fileID: 11400000, guid: 695a75fb26e46034d976aee7b0fa4180, type: 2}
+  - {fileID: 11400000, guid: 3812701e0d31c3840afe3147cd2f20c1, type: 2}
   treatmentExplication: {fileID: 0}
   requireStethoscope: 0
   requireSphygmomanometer: 0
@@ -43,3 +45,4 @@ MonoBehaviour:
   xrayResult: "Resultados dentro dos padr\xF5es"
   ultrasoundResult: "Resultados dentro dos padr\xF5es"
   bloodTestResult: "Resultados dentro dos padr\xF5es"
+  currentProbability: 0

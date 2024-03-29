@@ -6,4 +6,5 @@ public class PageSideLink : MonoBehaviour
 {
     public BookPage bookPageSideA;
     public BookPage bookPageSideB;
+    public BoxCollider grabCollider;
 }

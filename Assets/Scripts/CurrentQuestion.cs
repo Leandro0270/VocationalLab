@@ -45,10 +45,9 @@ public class CurrentQuestion : MonoBehaviour
             askButton.interactable = false;
             transcriptAudioButton.interactable = true;
             cautionPanel.SetActive(false);
-            if (_currentQuestion.unlockHint.Length >0)
+            if (_currentQuestion.unlockSymptoms.Length >0 || _currentQuestion.unlockCause.Length > 0)
             {
                 cautionPanel.SetActive(false);
-
                 newHintPanel.SetActive(true);
             }
             else if (_currentQuestion.unlockQuestions.Length > 0)
@@ -123,19 +122,21 @@ private IEnumerator MakeAudioQuestion()
         cautionPanel.SetActive(false);
 
     }
-    else if (_currentQuestion.unlockHint.Length > 0)
+    else if (_currentQuestion.unlockSymptoms.Length > 0 || _currentQuestion.unlockCause.Length > 0)
     {
-        foreach (var hint in _currentQuestion.unlockHint)
-        {
-            monitorManager.AddNewHint(hint);
-        }
+        if(_currentQuestion.unlockSymptoms.Length > 0)
+            foreach (var symptom in _currentQuestion.unlockSymptoms)
+                monitorManager.AddNewHint(symptom.symptomName);
+        
+        if (_currentQuestion.unlockCause.Length > 0)
+            foreach (var hint in _currentQuestion.unlockCause)
+                monitorManager.AddNewHint(hint.causeName);
         
         newHintPanel.SetActive(true);
-        cautionPanel.SetActive(false);
     }
-    else
-        cautionPanel.SetActive(false);
     
+    
+    cautionPanel.SetActive(false);
     _patientAudioPlaying = false;
     transcriptingAudioPanel.SetActive(false);
     questionDetailsPanel.SetActive(true);
@@ -149,7 +150,7 @@ private IEnumerator MakeAudioQuestion()
     public void PrintTranscription()
     {
         if (!_currentQuestion.isAnswered) return;
-        printer.PrintText(_currentQuestion.answer);
+        printer.PrintText(_currentQuestion.question ,_currentQuestion.answer);
             
     }
 

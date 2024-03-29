@@ -14,13 +14,13 @@ public class DiseasePanel : MonoBehaviour
     private List<TextMeshProUGUI> _symptomsTexts = new List<TextMeshProUGUI>();
     private List<TextMeshProUGUI> _causesTexts = new List<TextMeshProUGUI>();
     private int _probability=0;
-    public void SetDisease(String diseaseTitle, String[] symptoms, String[] causes)
+    public void SetDisease(String diseaseTitle, ScObSymptoms[] symptoms, ScObCause[] causes)
     {
         diseaseName.text = diseaseTitle;
         foreach (var symptom in symptoms)
         {
             TextMeshProUGUI newSymptom = Instantiate(textPrefab, symptomsPanel.transform);
-            newSymptom.text = symptom;
+            newSymptom.text = symptom.symptomName;
             _symptomsTexts.Add(newSymptom);
         }
         
@@ -29,14 +29,14 @@ public class DiseasePanel : MonoBehaviour
             uniqueCausePanel.SetActive(true);
             causesPanel.SetActive(false);
             TextMeshProUGUI newCause = uniqueCausePanel.GetComponent<TextMeshProUGUI>();
-            newCause.text = causes[0];
+            newCause.text = causes[0].causeName;
             _causesTexts.Add(newCause);
             return;
         }
         foreach (var cause in causes)
         {
             TextMeshProUGUI newCause = Instantiate(textPrefab, causesPanel.transform);
-            newCause.text = cause;
+            newCause.text = cause.causeName;
             _causesTexts.Add(newCause);
         }
         
