@@ -199,7 +199,8 @@ public class MonitorManager : MonoBehaviour
         _currentScreen = _lastScreen;
         _currentScreen.SetActive(true);
     }
-
+    
+    
     public void SetNewPatient(ScObPatient newPatient, AudioSource patientAudio)
     {
         
