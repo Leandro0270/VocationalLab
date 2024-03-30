@@ -36,6 +36,7 @@ public class PatientBehavior : MonoBehaviour
     [SerializeField] private float turnSpeed = 2f;
 
     private bool _patientAudioPlaying;
+    private bool _startedAppointment;
 
 
     public bool debug;
@@ -52,6 +53,7 @@ public class PatientBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!_startedAppointment) return;
         if(!_startedDialogue && !walkingToChair)
         {
             _startedDialogue = true;
@@ -79,7 +81,10 @@ public class PatientBehavior : MonoBehaviour
         }
 
     }
-    
+    public void StartAppointment()
+    {
+        _startedAppointment = true;
+    }
     public IEnumerator StartDialogue(AudioClip audioClip)
     {
         if(_patientAudioPlaying) yield break;

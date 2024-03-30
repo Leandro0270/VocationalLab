@@ -15,6 +15,8 @@ public class MonitorManager : MonoBehaviour
     [SerializeField] private GameObject diagnosisScreen;
     [SerializeField] private GameObject examScreen;
     [SerializeField] private GameObject askScreen;
+    [SerializeField] private GameObject startButtonScreen;
+    [SerializeField] private GameObject wipSreen;
     //Main Patient Page======================================================================
     [SerializeField] private Button mainPage_examButton;
     [SerializeField] private Button mainPage_askButton;
@@ -66,6 +68,8 @@ public class MonitorManager : MonoBehaviour
     [SerializeField] private AudioSource patientAudioSource;
     [SerializeField] private AudioSource doctorAudioSource;
     [SerializeField] private AudioClip welcomeDoctorAudio;
+    [SerializeField] private AssistantVoice assistantVoice;
+    [SerializeField] private HingeJoint doorHinge;
     private AudioClip _currentPatientWelcomeAudioClip;
     private bool _doctorAudioPlaying;
     private bool _patientAudioPlaying;
@@ -101,12 +105,19 @@ public class MonitorManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void StartAppointmentButton()
+    {
+        doorHinge.useMotor = true;
+        startButtonScreen.SetActive(false);
+        mainPatientScreen.SetActive(true);
+        assistantVoice.StopAllStartedClips();
         StartAppointment(debugPatient, patientAudioSource);
     }
-    
-    
     private void StartAppointment(ScObPatient newPatient, AudioSource patientAudio)
     {
+        patientBehavior.StartAppointment();
         SetNewPatient(newPatient, patientAudio);
         mainPage_diagnosisButton.interactable = false;
         mainPage_askButton.interactable = false;
@@ -119,6 +130,7 @@ public class MonitorManager : MonoBehaviour
 
     public IEnumerator StartTalk()
     {
+        doorHinge.useMotor = false;
         {
             if (_doctorAudioPlaying || _patientAudioPlaying)
             {
@@ -141,6 +153,10 @@ public class MonitorManager : MonoBehaviour
         yield return new WaitForSeconds(2);
         StartCoroutine(patientBehavior.StartDialogue(_currentPatientWelcomeAudioClip));
         yield return new WaitWhile(() => patientAudioSource.isPlaying);
+        _patientAudioPlaying = false;
+        assistantVoice.AddAfterPatientFirstSymptomsQueue();
+        assistantVoice.AddBookInformationQueue();
+        assistantVoice.PlayClip(2);
         mainPage_diagnosisButton.interactable = true;
         mainPage_askButton.interactable = true;
         mainPage_medicationButton.interactable = true;
@@ -236,9 +252,21 @@ public class MonitorManager : MonoBehaviour
         
         
     }
-
+    public void ReturnFromDiagnosticScreen()
+    {
+        diagnosisScreen.SetActive(false);
+        mainPatientScreen.SetActive(true);
+    }
+    public void ReturnFromQuestionScreen()
+    {
+        askScreen.SetActive(false);
+        mainPatientScreen.SetActive(true);
+    }
+    
     public void OpenDiagnosticScreen()
     {
+        assistantVoice.AddDiagnosticQueue();
+        assistantVoice.PlayClip(2);
         diagnosisScreen.SetActive(true);
         mainPatientScreen.SetActive(false);
         monitorDiagnosis.OpenDiagnosticPanel();
@@ -258,8 +286,9 @@ public class MonitorManager : MonoBehaviour
     //Medication methods
     public void SpawnMedication()
     {
-        
         if (_currentPatientUsedMedication.Length < 1) return;
+        assistantVoice.AddMedicationQueue();
+        assistantVoice.PlayClip(3);
         if(_instantiatedMedications.Count > 0)
             foreach (var medication in _instantiatedMedications)
             {
@@ -284,9 +313,45 @@ public class MonitorManager : MonoBehaviour
         }
     }
     
+    
+    public void AssistantPrintTranscription()
+    {
+        assistantVoice.AddPrintTranscriptionQueue();
+        assistantVoice.PlayClip(2);
+    }
+    public void AssistantUnlockedNewQuestionOrHint(bool hint, bool question)
+    {
+        switch (hint)
+        {
+            case true when question:
+                assistantVoice.AddUnlockedNewHintAndQuestionQueue();
+                assistantVoice.PlayClip(2);
+                break;
+            case true:
+                assistantVoice.AddUnlockedNewHintQueue();
+                assistantVoice.PlayClip(2);
+                break;
+            default:
+            {
+                if (question)
+                {
+                    assistantVoice.AddUnlockedNewQuestionQueue();
+                    assistantVoice.PlayClip(2);
+                }
+
+                break;
+            }
+        }
+    }
     public void ConfirmDiagnosis(ScObDisease disease)
     {
         timeCounter.StopCounting();
+        wipSreen.SetActive(true);
+        diagnosisScreen.SetActive(false);
+        mainPatientScreen.SetActive(false);
+        askScreen.SetActive(false);
+        assistantVoice.AddWipQueue();
+        assistantVoice.PlayClip(2);
         Debug.Log(disease == _currentPatientDisease ? "Acertou" : "Errou");
     }
     public void AddTimesPlayerAsked()

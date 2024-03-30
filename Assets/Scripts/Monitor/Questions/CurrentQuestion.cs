@@ -111,12 +111,24 @@ private IEnumerator MakeAudioQuestion()
     microphoneModel.SetActive(false);
     _patientBehavior.StopTalking();
 
-    if (_currentQuestion.unlockQuestions.Length > 0)
+    int unlockQuestions = _currentQuestion.unlockQuestions.Length;
+    int unlockSymptoms = _currentQuestion.unlockSymptoms.Length;
+    int unlockCause = _currentQuestion.unlockCause.Length;
+    bool playedBoth = false;
+    if (unlockQuestions > 0 && (unlockCause + unlockSymptoms) > 0)
+    {
+        playedBoth = true;
+        monitorManager.AssistantUnlockedNewQuestionOrHint(true, true);
+    }
+
+    if (unlockQuestions > 0)
     {
         foreach (ScObPatientQuestion newQuestion in _currentQuestion.unlockQuestions)
         {
             monitorQuestions.UnlockQuestion(newQuestion);
         }
+        if(!playedBoth)
+            monitorManager.AssistantUnlockedNewQuestionOrHint(false,true);
 
         newQuestionPanel.SetActive(true);
         cautionPanel.SetActive(false);
@@ -132,10 +144,12 @@ private IEnumerator MakeAudioQuestion()
             foreach (var hint in _currentQuestion.unlockCause)
                 monitorManager.AddNewHint(hint.causeName);
         
+        if(!playedBoth)
+            monitorManager.AssistantUnlockedNewQuestionOrHint(true,false);
         newHintPanel.SetActive(true);
     }
     
-    
+    monitorManager.AssistantPrintTranscription();
     cautionPanel.SetActive(false);
     _patientAudioPlaying = false;
     transcriptingAudioPanel.SetActive(false);
