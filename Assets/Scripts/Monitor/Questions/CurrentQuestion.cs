@@ -115,37 +115,38 @@ private IEnumerator MakeAudioQuestion()
     int unlockSymptoms = _currentQuestion.unlockSymptoms.Length;
     int unlockCause = _currentQuestion.unlockCause.Length;
     bool playedBoth = false;
-    if (unlockQuestions > 0 && (unlockCause + unlockSymptoms) > 0)
-    {
-        playedBoth = true;
-        monitorManager.AssistantUnlockedNewQuestionOrHint(true, true);
-    }
+    
+    // if (unlockQuestions > 0 && (unlockCause + unlockSymptoms) > 0)
+    // {
+    //     playedBoth = true;
+    //     monitorManager.AssistantUnlockedNewQuestionOrHint(true, true);
+    // }
 
     if (unlockQuestions > 0)
     {
         foreach (ScObPatientQuestion newQuestion in _currentQuestion.unlockQuestions)
-        {
             monitorQuestions.UnlockQuestion(newQuestion);
-        }
+        
         if(!playedBoth)
             monitorManager.AssistantUnlockedNewQuestionOrHint(false,true);
 
         newQuestionPanel.SetActive(true);
-        cautionPanel.SetActive(false);
 
     }
-    else if (_currentQuestion.unlockSymptoms.Length > 0 || _currentQuestion.unlockCause.Length > 0)
+    
+    if (unlockCause+unlockSymptoms > 0)
     {
-        if(_currentQuestion.unlockSymptoms.Length > 0)
+        if(unlockSymptoms > 0)
             foreach (var symptom in _currentQuestion.unlockSymptoms)
                 monitorManager.AddNewHint(symptom.symptomName);
         
-        if (_currentQuestion.unlockCause.Length > 0)
+        if (unlockCause > 0)
             foreach (var hint in _currentQuestion.unlockCause)
                 monitorManager.AddNewHint(hint.causeName);
         
         if(!playedBoth)
             monitorManager.AssistantUnlockedNewQuestionOrHint(true,false);
+        
         newHintPanel.SetActive(true);
     }
     
@@ -169,9 +170,9 @@ private IEnumerator MakeAudioQuestion()
     }
 
     public void ReturnButton()
-    {   newHintPanel.SetActive(true);
-        newQuestionPanel.SetActive(true);
-        cautionPanel.SetActive(!_currentQuestion.isAnswered);
+    {   newHintPanel.SetActive(false);
+        newQuestionPanel.SetActive(false);
+        cautionPanel.SetActive(true);
         monitorQuestions.ReturnFromDetailsScreen();
     }
 

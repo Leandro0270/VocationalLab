@@ -151,6 +151,7 @@ public class HintBook : MonoBehaviour
         page.limits = new JointLimits { min = 0, max = page.limits.max - pageSpaceAngle * (_pages.Count - 1) };
         PageSideLink sides = page.GetComponent<PageSideLink>();
         sides.grabCollider.layerOverridePriority = (numberOfPages-_pages.Count);
+        page.GetComponent<InteractivePage>().SetHintBook(this);
         _bookPages.Add(sides.bookPageSideA);
         _bookPages.Add(sides.bookPageSideB);
 
