@@ -38,7 +38,6 @@ public class PillCase : MonoBehaviour
     
     
     //Player interaction
-    private bool _isPlayerHolding;
     private bool _isPlayerLooking;
     
     //XR
@@ -74,12 +73,10 @@ public class PillCase : MonoBehaviour
         if (isHolding)
         {
             medicationInformationPanel.SetActive(true);
-            _isPlayerHolding = true;
         }
         else
         {
             medicationInformationPanel.SetActive(false);
-            _isPlayerHolding = false;
         }
     }
     public void SetNewMedication(ScObMedication newMedication, XRInteractionManager interactionManager)
