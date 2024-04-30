@@ -62,6 +62,7 @@ public class MonitorManager : MonoBehaviour
     //=======================================================================
     [SerializeField] private PatientBehavior patientBehavior;
     [SerializeField] private MonitorDiagnosis monitorDiagnosis;
+    [SerializeField] private DiagnosisResult diagnosisResult;
     [SerializeField] private ScObDisease[] diseases;
     [SerializeField] private MonitorQuestions monitorQuestions;
     
@@ -346,13 +347,15 @@ public class MonitorManager : MonoBehaviour
     public void ConfirmDiagnosis(ScObDisease disease)
     {
         timeCounter.StopCounting();
-        wipSreen.SetActive(true);
         diagnosisScreen.SetActive(false);
         mainPatientScreen.SetActive(false);
         askScreen.SetActive(false);
-        assistantVoice.AddWipQueue();
-        assistantVoice.PlayClip(2);
-        Debug.Log(disease == _currentPatientDisease ? "Acertou" : "Errou");
+        wipSreen.SetActive(true);
+        diagnosisResult.SetPatientBehavior(patientBehavior);
+        diagnosisResult.SetPatientAudios(_currentPatient.thanksAudioClip, patientAudioSource);
+        diagnosisResult.SetWinClip(disease.treatmentExplication);
+        StartCoroutine(diagnosisResult.SetWin(disease == _currentPatientDisease));
+
     }
     public void AddTimesPlayerAsked()
     {

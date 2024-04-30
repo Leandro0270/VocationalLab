@@ -22,6 +22,7 @@ public class ScObPatient : ScriptableObject
     public ScObMedication[] usedMedication;
     public ScObPatientQuestion[] questions;
     public ScObSymptoms[] firstSymptoms;
+    public AudioClip thanksAudioClip;
     [Range(0,5)]
     public int diagnosisComplexity;
 

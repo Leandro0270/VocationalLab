@@ -29,7 +29,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2bba23208b33ae04a94b0e3652ad83d5, type: 2}
   - {fileID: 11400000, guid: 3812701e0d31c3840afe3147cd2f20c1, type: 2}
   - {fileID: 11400000, guid: 695a75fb26e46034d976aee7b0fa4180, type: 2}
-  treatmentExplication: {fileID: 0}
+  treatmentExplication: {fileID: 8300000, guid: df883514c3fdb59409bdd60839e2a080,
+    type: 3}
   requireStethoscope: 0
   requireSphygmomanometer: 0
   requireThermometer: 0

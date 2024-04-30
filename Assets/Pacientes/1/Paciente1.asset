@@ -37,4 +37,5 @@ MonoBehaviour:
   firstSymptoms:
   - {fileID: 11400000, guid: 3f20f355c48b76e43956dc85adcc1301, type: 2}
   - {fileID: 11400000, guid: ce731b37e3f017444b284bd163591aa0, type: 2}
+  thanksAudioClip: {fileID: 8300000, guid: dd9185c934633d841b4ab135dee3b0c3, type: 3}
   diagnosisComplexity: 1

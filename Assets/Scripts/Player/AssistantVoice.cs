@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Video;
 
 public class AssistantVoice : MonoBehaviour
@@ -21,7 +22,8 @@ public class AssistantVoice : MonoBehaviour
     [SerializeField] private AudioClip unlockedNewHintAndQuestionClip;
     [SerializeField] private AudioClip[] unlockedNewHintRepeatClip;
     [SerializeField] private AudioClip[] unlockedNewQuestionRepeatClip;
-    [SerializeField] private AudioClip wipAudioClip;
+    [SerializeField] private AudioClip looseAudioClip;
+    [SerializeField] private AudioClip winAudioClip;
     [SerializeField] private VideoPlayer videoPlayer;
     [SerializeField] private float timeToFirstClip = 5f;
 
@@ -39,7 +41,8 @@ public class AssistantVoice : MonoBehaviour
     private bool _playedPrintTranscription;
     private bool _playedDiagnostic;
     private bool _playedUnlockedNewHintAndQuestion;
-    private bool _playedWip;
+    private bool _playedLoose;
+    private bool _playedWin;
     private float _timeBetweenClips = 2f;
     private List<AudioClip> _audioClipQueue = new List<AudioClip>();
 
@@ -167,12 +170,20 @@ public class AssistantVoice : MonoBehaviour
         _playedUnlockedNewHintAndQuestion = true;
     }
     
-    public void AddWipQueue()
+    public void AddLooseQueue()
     {
-        if (wipAudioClip == null) return;
-        if (_playedWip) return;
-        _audioClipQueue.Add(wipAudioClip);
-        _playedWip = true;
+        if (looseAudioClip == null) return;
+        if (_playedLoose) return;
+        _audioClipQueue.Add(looseAudioClip);
+        _playedLoose = true;
+    }
+    
+    public void AddWinQueue()
+    {
+        if (winAudioClip == null) return;
+        if (_playedWin) return;
+        _audioClipQueue.Add(winAudioClip);
+        _playedWin = true;
     }
 public void StopAllStartedClips()
     {

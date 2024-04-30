@@ -20,6 +20,9 @@ public class CurrentQuestion : MonoBehaviour
     [SerializeField] private GameObject newHintPanel;
     [SerializeField] private GameObject microphoneModel;
     [SerializeField] private Printer printer;
+    [SerializeField] private AudioSource notificationAudioSource;
+    [SerializeField] private AudioClip hintNotificationClip;
+    [SerializeField] private AudioClip questionNotificationClip;
     private PatientBehavior _patientBehavior;
     private AudioClip _currentPatientAudioClip;
     private AudioSource _patientAudioSource;
@@ -116,19 +119,25 @@ private IEnumerator MakeAudioQuestion()
     int unlockCause = _currentQuestion.unlockCause.Length;
     bool playedBoth = false;
     
-    // if (unlockQuestions > 0 && (unlockCause + unlockSymptoms) > 0)
-    // {
-    //     playedBoth = true;
-    //     monitorManager.AssistantUnlockedNewQuestionOrHint(true, true);
-    // }
+     if (unlockQuestions > 0 && (unlockCause + unlockSymptoms) > 0)
+     {
+         playedBoth = true;
+         notificationAudioSource.clip = hintNotificationClip;
+         notificationAudioSource.Play();
+         monitorManager.AssistantUnlockedNewQuestionOrHint(true, true);
+     }
 
     if (unlockQuestions > 0)
     {
         foreach (ScObPatientQuestion newQuestion in _currentQuestion.unlockQuestions)
             monitorQuestions.UnlockQuestion(newQuestion);
-        
-        if(!playedBoth)
-            monitorManager.AssistantUnlockedNewQuestionOrHint(false,true);
+
+        if (!playedBoth)
+        {
+            notificationAudioSource.clip = questionNotificationClip;
+            notificationAudioSource.Play();
+            monitorManager.AssistantUnlockedNewQuestionOrHint(false, true);
+        }
 
         newQuestionPanel.SetActive(true);
 
@@ -145,6 +154,7 @@ private IEnumerator MakeAudioQuestion()
                 monitorManager.AddNewHint(hint.causeName);
         
         if(!playedBoth)
+            notificationAudioSource.clip = hintNotificationClip;
             monitorManager.AssistantUnlockedNewQuestionOrHint(true,false);
         
         newHintPanel.SetActive(true);
