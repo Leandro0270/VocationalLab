@@ -22901,6 +22901,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221001092}
   m_CullTransparentMesh: 1
+--- !u!1 &1222437943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3451153239233231564, guid: 63d41b030f0d07d498232e977e33d1fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 1803900640}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1224355938
 GameObject:
   m_ObjectHideFlags: 0
@@ -32760,7 +32766,9 @@ MonoBehaviour:
   - {fileID: 264351629}
   - {fileID: 828270855}
   - {fileID: 1975547109}
-  optionsButtons: []
+  optionsButtons:
+  - {fileID: 1957507660}
+  - {fileID: 1222437943}
   pageNumberText: {fileID: 1874530129}
 --- !u!1 &1720545405
 GameObject:
@@ -35974,6 +35982,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1957507660 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3451153239233231564, guid: 63d41b030f0d07d498232e977e33d1fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 79188529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1957615430 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4682534075774152078, guid: 69f411330fec58c4885d971ebc0c7582,
