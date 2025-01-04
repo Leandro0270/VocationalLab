@@ -10,7 +10,7 @@ This repository contains the prototype and related resources for the VocationalL
 - **Presentations:**
   - **WTT 2024:** Presented during the first semester of 2024.
   - **Jornadas Iberoamericanas de HCI 2024:** Presented in Pereira, Colombia.
-- **Publication:** The research article will be published in the *Interacción - Revista Digital de AIPO* in 2025.
+- **Publication:** *Interacción - Revista Digital de AIPO* in 12/27/2024 at https://revista.aipo.es/index.php/INTERACCION/article/view/117/117.
 
 ## 🎮 Project Overview
 
