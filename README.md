@@ -39,6 +39,7 @@ Watch a video of an early version of the project on [YouTube](https://youtu.be/u
 ## 📂 Repository Content
 
 - **Prototype Code:** The Unity project files used to develop the VocationalLab game.
+- **Released Research Report in AIPO (Spanish):** https://revista.aipo.es/index.php/INTERACCION/article/view/117/117
 - **Early Research Report (Portuguese):** [Uma_Experiência_Imersiva_com_Realidade_Virtual_para_Apoio_à_Orientação_Vocacional-6.pdf](https://github.com/user-attachments/files/18203759/Uma_Experiencia_Imersiva_com_Realidade_Virtual_para_Apoio_a_Orientacao_Vocacional-6.pdf)
 
   > ⚠️ **Note:** This version of the report is not the final version that will be published in the *Interacción - Revista Digital de AIPO*.
